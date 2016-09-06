@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.lishiwei.westbund.Fragment.FragmentCalenderPkg.FragmentOtherExhibition" />
+
+        <variable
+            name="DataBindingUtil"
+            type="com.lishiwei.westbund.Utils.DataBindingUtils" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/loading_view" />
+
+        <include layout="@layout/error_view" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:OnRefreshListener="@{listener.onRefreshListener}">
+
+            <com.handmark.pulltorefresh.library.PullToRefreshRecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="600dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:scrollbars="none"
+                app:Completefreshing="@{listener.isRefreshing}"
+                app:LayoutManager="@{DataBindingUtil.LinearLayoutManager}"
+                app:Mode="@{DataBindingUtil.pullFromEnd}"
+                app:OnRefreshListener="@{listener.onRefreshListener2}"
+                app:Adapter="@{listener.otherExhibitionRecyclerAdapter}" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+</layout>

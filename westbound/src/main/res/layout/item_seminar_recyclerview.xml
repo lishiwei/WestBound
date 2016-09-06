@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="Senimar"
+            type="com.lishiwei.model.Seminar" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="2dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_Seminar_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick=""
+                android:text="@{Senimar.date}"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_Seminar_Week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+
+                android:text="@{Senimar.weekday}"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_Seminar_Status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:background="@color/colorAccent"
+                android:paddingBottom="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="2dp"
+                android:text="@{Senimar.status}"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="16dp"
+            app:image="@{Senimar.Url}" />
+
+        <TextView
+            android:id="@+id/tv_Seminar_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/exibition_title_bottom_margin"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="16dp"
+            android:text="一位藏家的策展时间以及他的录像艺术收藏指南"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tv_Seminar_Guest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="@{Senimar.guest}"
+            android:textSize="@dimen/exibition_item_textsize" />
+
+        <TextView
+            android:id="@+id/tv_Seminar_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="@dimen/exibition_item_margin"
+            android:text="@{Senimar.time}"
+            android:textSize="@dimen/exibition_item_textsize" />
+    </LinearLayout>
+</layout>

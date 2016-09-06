@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.lishiwei.westbund.Activity.ActivitySplash">
+    <FrameLayout
+        android:id="@+id/fl_SplashActivity_Back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splashback1"
+        >
+
+        <ImageView
+            android:id="@+id/iv_ActivitySplashWhiteBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:background="@drawable/splashlogo1"
+       />
+</FrameLayout>

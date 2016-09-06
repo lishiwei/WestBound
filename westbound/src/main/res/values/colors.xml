@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#689f38</color>
+    <color name="colorAccent">#4caf50</color>
+    <color name="mainColor">#73b24e</color>
+    <color name="logobgColor">#72b247</color>
+    <color name="recylerviewDividerbgColor">#e7e7e7</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="subtitle_color">#888888</color>
+    <color name="content_color">#888888</color>
+
+    <color name="exhibition_status">#b4b4b4</color>
+    <color name="exhibition_line">#cecece</color>
+    <color name="exhibition_text">#888888</color>
+</resources>
