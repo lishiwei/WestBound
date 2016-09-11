@@ -36,7 +36,7 @@ public class ImageLoad {
     public static void displayImageView(Context context, String imageURL, final ImageView imageView) {
 
         imageView.setBackgroundColor(Color.parseColor("#cecece"));
-        Picasso.with(context).load(imageURL).placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).centerCrop().fit().error(R.drawable.ic_cloud_off).into(imageView, new Callback() {
+        Picasso.with(context).load(imageURL).placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).centerInside().fit().error(R.drawable.ic_cloud_off).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
                 imageView.setBackgroundColor(Color.parseColor("#00000000"));

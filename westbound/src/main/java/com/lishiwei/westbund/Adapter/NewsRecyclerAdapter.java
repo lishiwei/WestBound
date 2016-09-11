@@ -9,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lishiwei.core.ImageLoad;
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
 import com.lishiwei.model.News;
 import com.lishiwei.westbund.Activity.ActivityNewsDetail;
 import com.lishiwei.westbund.R;
+import com.lishiwei.westbund.Utils.DataBindingUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -97,23 +99,13 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof HeaderViewHolder) {
 
         } else if (holder instanceof ViewHolder) {
-
-//            ((ViewHolder) holder).tvNewsRecyclerTime.setText(df3.format(new Date(Long.valueOf(newsList.get(position - mHeaderCount).getCreateTime()))));
-            ((ViewHolder) holder).tvNewsRecyclerTime.setText(newsList.get(position - mHeaderCount).getCreateTime());
+            ((ViewHolder) holder).tvNewsRecyclerTime.setText(DataBindingUtils.getCorrectTime(newsList.get(position - mHeaderCount).getCreateTime()));
             ((ViewHolder) holder).tvNewsRecyclerMainTitle.setText(newsList.get(position - mHeaderCount).getMainTitle());
             ((ViewHolder) holder).tvNewsRecyclerSubTitle.setText(newsList.get(position - mHeaderCount).getSubTitle());
             ((ViewHolder) holder).tvNewsRecyclerFrom.setText(newsList.get(position - mHeaderCount).getSource());
             ((ViewHolder) holder).tvNewsRecyclerContent.setText(newsList.get(position - mHeaderCount).getContent());
-            if (position==1)
-            {
-                ImageLoad.displayLocalImageView(context,""+R.drawable.news1,((ViewHolder) holder).ivNewsRecyclerImageView);
-            }else if (position==2)
-            {
-                ImageLoad.displayLocalImageView(context,""+R.drawable.news2,((ViewHolder) holder).ivNewsRecyclerImageView);
-            }
-            else {
-                ImageLoad.displayImageView(context, newsList.get(position - mHeaderCount).getNewsImgUrl(), ((ViewHolder) holder).ivNewsRecyclerImageView);
-            }
+
+            ImageLoad.displayImageView(context, WestBoundRetrofit.BaseUrl+newsList.get(position - mHeaderCount).getNewsImgUrl(), ((ViewHolder) holder).ivNewsRecyclerImageView);
         }
 
     }

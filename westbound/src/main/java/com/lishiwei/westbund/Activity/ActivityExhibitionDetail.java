@@ -56,10 +56,10 @@ getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         tvExhibitionDetailExpoName.setText(exhibition.getExpoName());
         tvExhibitionDetailLocation.setText(exhibition.getLocation());
         tvExhibitionDetailStatus.setText(exhibition.getStatus());
-        tvExhibitionDetailTime.setText(exhibition.getTime());
+        tvExhibitionDetailTime.setText(exhibition.getTimeStr());
         tvExhibitionDetailTitle.setText(exhibition.getShowName());
         tvExhibitionDetailContent.setText(exhibition.getContent());
-        ImageLoad.displayImageView(this, exhibition.getImageURL(), ivExhibitionDetailImageView);
+        ImageLoad.displayImageView(this, exhibition.getExhibitionImgUrl(), ivExhibitionDetailImageView);
         ivExhibitionDetailMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

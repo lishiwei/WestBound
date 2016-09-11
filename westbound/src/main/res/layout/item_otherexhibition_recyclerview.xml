@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+<import type="com.lishiwei.westbund.Utils.DataBindingUtils"/>
         <variable
             name="Exhibition"
             type="com.lishiwei.model.Exhibition"></variable>
@@ -32,7 +32,7 @@
                 android:id="@+id/tv_Seminar_Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Exhibition.date}"
+                android:text="@{Exhibition.dateStart}"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp" />
 
@@ -79,8 +79,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+
             android:layout_margin="12dp"
-            android:background="@drawable/gallery" />
+            app:image="@{DataBindingUtils.getCorrectImageUrl(Exhibition.exhibitionImgUrl)}"
+            />
 
 
         <TextView
@@ -88,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="@{Exhibition.time}" />
+            android:text="@{Exhibition.curator}" />
 
         <TextView
             android:id="@+id/tv_Seminar_Time"
@@ -97,6 +99,6 @@
             android:layout_marginBottom="36dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="4dp"
-            android:text="@{Exhibition.location}" />
+            android:text="@{Exhibition.timeStr}" />
     </LinearLayout>
 </layout>

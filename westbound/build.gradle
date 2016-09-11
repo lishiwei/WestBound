@@ -46,7 +46,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.android.support:design:' + rootProject.ext.appcompat7Version
     compile 'com.android.support:recyclerview-v7:' + rootProject.ext.appcompat7Version
-    compile 'com.google.code.gson:gson:2.4'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'

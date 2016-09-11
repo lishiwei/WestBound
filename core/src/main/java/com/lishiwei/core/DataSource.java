@@ -14,5 +14,5 @@ public interface DataSource < T > {
         void onError( );
     }
 
-    void getDatas(int pageSize,int pageNo,@NonNull LoadDataCallBack<T> loadDataCallBack);
+    void getDatas(int pageSize,int pageNo,@NonNull final LoadDataCallBack<T> loadDataCallBack);
 }

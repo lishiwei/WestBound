@@ -2,39 +2,68 @@ package com.lishiwei.core;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
+import com.lishiwei.model.BaseResponseBody;
 import com.lishiwei.model.Gallery;
+import com.lishiwei.model.News;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by lishiwei on 16/5/21.
  */
 public class GalleryRemoteDataSource implements DataSource<Gallery> {
+    private static final String TAG = GalleryRemoteDataSource.class.getSimpleName();
+
     @Override
     public void getDatas(int pageSize, int pageNo,final @NonNull LoadDataCallBack<Gallery> loadDataCallBack) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                List<Gallery> list = new ArrayList<>();
-                list.add(new Gallery("1","艾可画廊", "Aike-Dellarco", "上海"));
-                list.add(new Gallery("2","北京现代画廊", "Beijing Art Now Gallery", "上海"));
-                list.add(new Gallery("3","站台中国", "PlatFormChina", "上海"));
-                list.add(new Gallery("4","阿拉里奥画廊", "Arario Gallery", "上海"));
-                list.add(new Gallery("5","博而励画廊", "Boers-Li", "上海"));
-                list.add(new Gallery("6","萨迪科尔斯", "Sadie Coles HQ", "上海"));
-                list.add(new Gallery("7","格莱斯顿画廊", "Gladstone Gallery", "上海"));
-                list.add(new Gallery("8","豪瑟沃斯画廊", "Hauser & Wirth", "上海"));
-                list.add(new Gallery("9","长征空间", "Long March Space", "上海"));
 
-                if (list.size() > 0) {
-                    loadDataCallBack.onSucceed(list);
+        final List<Gallery> list = new ArrayList<>();
+        WestBoundRetrofit.getRetrofitService().getGallery(JsonUtils.getPageInfo(pageSize,pageNo))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .map(new Func1<BaseResponseBody<Gallery>, List<Gallery>>() {
+                    @Override
+                    public List<Gallery> call(BaseResponseBody<Gallery> newsBaseResponseBody) {
+                        Log.d(TAG, "call: "+newsBaseResponseBody.toString());
+                        Log.d(TAG, "call: "+newsBaseResponseBody.getDataList());
+                        return newsBaseResponseBody.getDataList();
+                    }
+                }).subscribe(new Subscriber<List<Gallery>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError: "+e.toString());
+                loadDataCallBack.onSucceed(list);
+                //loadNewsCallBack.onError(e);
+
+            }
+
+            @Override
+            public void onNext(List<Gallery> newsList) {
+                Log.d(TAG, "onNext: "+newsList.toString());
+                if (newsList.size() > 0) {
+                    loadDataCallBack.onSucceed(newsList);
+
                 } else {
-                    loadDataCallBack.onError();
+                    //loadNewsCallBack.onError(null);
                 }
             }
-        },2000);
-
+        });
     }
 }

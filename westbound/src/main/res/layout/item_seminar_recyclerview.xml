@@ -2,7 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+<import type="com.lishiwei.westbund.Utils.DataBindingUtils"/>
         <variable
             name="Senimar"
             type="com.lishiwei.model.Seminar" />
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick=""
-                android:text="@{Senimar.date}"
+                android:text="@{Senimar.startTime}"
                 android:textColor="@color/colorAccent"
                 android:textSize="22sp" />
 
@@ -56,7 +56,7 @@
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:paddingTop="2dp"
-                android:text="@{Senimar.status}"
+                android:text="@{DataBindingUtils.getCorrectStatus(Senimar.status)}"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -66,7 +66,8 @@
             android:layout_height="30dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
-            app:image="@{Senimar.Url}" />
+            app:image="@{DataBindingUtils.getCorrectImageUrl(Senimar.seminarImgUrl)}"
+            />
 
         <TextView
             android:id="@+id/tv_Seminar_Title"

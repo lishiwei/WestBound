@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lishiwei.core.ImageLoad;
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
 import com.lishiwei.model.Exhibition;
 import com.lishiwei.westbund.R;
 
@@ -61,9 +62,9 @@ public class ExhibitionRecyclerAdapter extends RecyclerView.Adapter<ExhibitionRe
         holder.tvExhibitionRecyclerStatus.setText(exhibitionList.get(position).getStatus());
         holder.tvExhibitionRecyclerTitle.setText(exhibitionList.get(position).getShowName());
         holder.tvExhibitionRecyclerDate.setText(exhibitionList.get(position).getDate());
-        holder.tvExhibitionRecyclerTime.setText(exhibitionList.get(position).getTime());
+        holder.tvExhibitionRecyclerTime.setText(exhibitionList.get(position).getTimeStr());
         holder.tvExhibitionRecyclerLocation.setText(exhibitionList.get(position).getLocation());
-        ImageLoad.displayImageView(context, exhibitionList.get(position).getImageURL(), holder.ivExhibitionRecyclerImageView);
+        ImageLoad.displayImageView(context, WestBoundRetrofit.BaseUrl+exhibitionList.get(position).getExhibitionImgUrl(), holder.ivExhibitionRecyclerImageView);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

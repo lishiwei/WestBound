@@ -29,4 +29,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:' + rootProject.ext.appcompat7Version
+    compile 'com.google.code.gson:gson:'+ rootProject.ext.gsonVersion
 }

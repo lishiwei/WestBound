@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lishiwei.core.ImageLoad;
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
 import com.lishiwei.model.News;
 import com.lishiwei.westbund.R;
+import com.lishiwei.westbund.Utils.DataBindingUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -67,13 +69,13 @@ public class ArtSceneRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         } else if (holder instanceof ViewHolder) {
 
 //            ((ViewHolder) holder).tvNewsRecyclerTime.setText(df3.format(new Date(Long.valueOf(newsList.get(position - mHeaderCount).getCreateTime()))));
-            ((ViewHolder) holder).tvNewsRecyclerTime.setText(newsList.get(position).getCreateTime());
+            ((ViewHolder) holder).tvNewsRecyclerTime.setText(DataBindingUtils.getCorrectTime(newsList.get(position).getCreateTime()));
             ((ViewHolder) holder).tvNewsRecyclerMainTitle.setText(newsList.get(position ).getMainTitle());
             ((ViewHolder) holder).tvNewsRecyclerSubTitle.setText(newsList.get(position).getSubTitle());
             ((ViewHolder) holder).tvNewsRecyclerFrom.setText(newsList.get(position ).getSource());
             ((ViewHolder) holder).tvNewsRecyclerContent.setText(newsList.get(position ).getContent());
 
-                ImageLoad.displayImageView(context, newsList.get(position ).getNewsImgUrl(), ((ViewHolder) holder).ivNewsRecyclerImageView);
+                ImageLoad.displayImageView(context, WestBoundRetrofit.BaseUrl+newsList.get(position ).getNewsImgUrl(), ((ViewHolder) holder).ivNewsRecyclerImageView);
 
         }
 
