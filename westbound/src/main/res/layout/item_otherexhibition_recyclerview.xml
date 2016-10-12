@@ -32,7 +32,7 @@
                 android:id="@+id/tv_Seminar_Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Exhibition.dateStart}"
+                android:text="@{Exhibition.expoName}"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp" />
 
@@ -40,8 +40,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
+                android:visibility="gone"
 
-                android:text="@{Exhibition.weekDay}"
+                android:text="@{Exhibition.showName}"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
@@ -50,13 +51,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-
                 android:background="@color/colorAccent"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:text="@{Exhibition.status}"
                 android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="4dp"
-            android:text="@{Exhibition.showName}" />
+            android:text="@{DataBindingUtils.getCorrectTime(Exhibition.dateStart,Exhibition.dateEnd)}" />
 
         <ImageView
             android:layout_width="match_parent"

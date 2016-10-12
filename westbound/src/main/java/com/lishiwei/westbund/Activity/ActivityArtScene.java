@@ -42,7 +42,7 @@ public class ActivityArtScene extends MvpLceActivity<SwipeRefreshLayout, List<Ne
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ptrArtScene.getRefreshableView().setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        newsRecyclerAdapter = new NewsRecyclerAdapter(getBaseContext());
+
         contentView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -92,7 +92,11 @@ presenter.loadNews(pageSize,pageNo,false);            }
 
     @Override
     public void setData(List<News> data) {
-        newsRecyclerAdapter.setNewsList(data);
+        if (newsRecyclerAdapter==null)
+        {
+            newsRecyclerAdapter = new NewsRecyclerAdapter(getBaseContext(),data);
+        }
+
         newsRecyclerAdapter.notifyDataSetChanged();
     }
 

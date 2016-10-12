@@ -23,6 +23,7 @@ import com.lishiwei.westbund.Utils.DataBindingUtils;
 import com.lishiwei.westbund.ViewInterface.OtherExhibitionView;
 import com.lishiwei.westbund.databinding.FragmentOtherExhibitionBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -42,15 +43,17 @@ public class FragmentOtherExhibition extends BaseMvpLceFragment<SwipeRefreshLayo
     public ObservableBoolean isRefreshing = new ObservableBoolean(false);
     @Bind(R.id.contentView)
     SwipeRefreshLayout contentView;
-
     public OtherExhibitionRecyclerAdapter otherExhibitionRecyclerAdapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    List<Exhibition> exhibitionList = new ArrayList<>();
     public RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
     public SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
+            isLoadMore = false;
+            currentPageNumber = 1;
             isRefreshing.set(true);
             loadData(true);
         }
@@ -65,9 +68,12 @@ public class FragmentOtherExhibition extends BaseMvpLceFragment<SwipeRefreshLayo
         @Override
         public void onPullUpToRefresh(PullToRefreshBase refreshView) {
             isRefreshing.set(true);
+            currentPageNumber++;
+            isLoadMore = true;
             loadData(true);
         }
     };
+
     public FragmentOtherExhibition() {
         // Required empty public constructor
     }
@@ -148,13 +154,18 @@ public class FragmentOtherExhibition extends BaseMvpLceFragment<SwipeRefreshLayo
 
     @Override
     public void setData(List<Exhibition> data) {
-        otherExhibitionRecyclerAdapter.setExhibitionList(data);
+        if (isLoadMore) {
+            exhibitionList.addAll(data);
+        } else {
+            exhibitionList = data;
+        }
+        otherExhibitionRecyclerAdapter.setExhibitionList(exhibitionList);
         otherExhibitionRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadData(1,10,pullToRefresh);
+        presenter.loadData(10,currentPageNumber, pullToRefresh);
     }
 
     @Override

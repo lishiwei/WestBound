@@ -31,7 +31,7 @@ public class OtherExhibitionRemoteDataSource implements DataSource<Exhibition> {
                 .map(new Func1<BaseResponseBody<Exhibition>, List<Exhibition>>() {
                     @Override
                     public List<Exhibition> call(BaseResponseBody<Exhibition> newsBaseResponseBody) {
-                        Log.d(TAG, "call: "+newsBaseResponseBody.toString());
+                        Log.d(TAG, "call: "+newsBaseResponseBody.getPage().toString());
                         Log.d(TAG, "call: "+newsBaseResponseBody.getDataList());
                         return newsBaseResponseBody.getDataList();
                     }

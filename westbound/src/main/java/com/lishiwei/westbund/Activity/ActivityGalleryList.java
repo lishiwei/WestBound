@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
 public class ActivityGalleryList extends AppCompatActivity {
 
 
+    private static final String TAG = ActivityGalleryList.class.getSimpleName();
     @Bind(R.id.container)
     ViewPager container;
     @Bind(R.id.iv_gallery_indicator)
@@ -46,6 +47,13 @@ public class ActivityGalleryList extends AppCompatActivity {
     LinearLayout lnGallery;
     @Bind(R.id.vp_gallery)
     ViewPager vpGallery;
+    public static final String GALLERY = "Gallery";
+    public static final String GALLERYPOSITION = "GalleryPosition";
+    ArrayList <Gallery> galleryArrayList;
+    int currentPosition;
+
+
+
     /**
      * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -70,6 +78,8 @@ public class ActivityGalleryList extends AppCompatActivity {
         setContentView(R.layout.activity_gallery_list);
 
         ButterKnife.bind(this);
+        galleryArrayList=  getIntent().<Gallery>getParcelableArrayListExtra(GALLERY);
+        currentPosition = getIntent().getIntExtra(GALLERYPOSITION,0);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         initFragmentadapter();
@@ -109,7 +119,10 @@ public class ActivityGalleryList extends AppCompatActivity {
             container.setAdapter(null);
         }
         container.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
+        Log.d(TAG, "initFragmentadapter: "+currentPosition);
+
         container.setAdapter(mSectionsPagerAdapter);
+        container.setCurrentItem(currentPosition);
         container.setPageMargin(DensityUtil.dip2px(-18));
 
     }
@@ -127,7 +140,7 @@ public class ActivityGalleryList extends AppCompatActivity {
         list.add(imageView);
         vpGallery.setPageMargin(DensityUtil.dip2px(30));
         if (imageAdapter == null) {
-            imageAdapter = new ImageAdapter(getBaseContext());
+            imageAdapter = new ImageAdapter(getBaseContext(),galleryArrayList);
             imageAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void OnItemClick(View view, int position) {
@@ -148,7 +161,8 @@ public class ActivityGalleryList extends AppCompatActivity {
             vpGallery.setAdapter(null);
         }
         vpGallery.setAdapter(imageAdapter);
-        vpGallery.setCurrentItem(0);
+        vpGallery.setCurrentItem(currentPosition);
+        Log.d(TAG, "initImageadapter: "+currentPosition);
         vpGallery.setOffscreenPageLimit(6);
         lnGallery.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -235,7 +249,9 @@ public class ActivityGalleryList extends AppCompatActivity {
         TextView tvHeadViewExGalleryListEnglishName;
         ImageView ivHeadViewExGalleryListTitle;
         TextView tvHeadViewExGalleryListLocaion;
-
+        ArrayList <Gallery> galleryArrayList;
+        Gallery gallery;
+        private int currentPosition;
         public PlaceholderFragment() {
 
         }
@@ -256,19 +272,19 @@ public class ActivityGalleryList extends AppCompatActivity {
         }
 
         @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (getArguments()!=null)
+            {
+               currentPosition = getArguments().getInt(ARG_SECTION_NUMBER,0);
+            }
+        }
+
+        @Override
         public void onActivityCreated(@Nullable Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
-            Gallery gallery = null;
-            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-                gallery = new Gallery("", "艾可画廊", "Aike-Dellarco", "");
-            }
-            if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-                gallery = new Gallery("", "北京现在画廊", "Beijing Art Now Gallery", "");
-            }
-            if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
-                gallery = new Gallery("", "站台中国", "PlatFormChina", "");
-            }
-
+            galleryArrayList = getActivity().getIntent().getParcelableArrayListExtra(GALLERY);
+            gallery = galleryArrayList.get(currentPosition);
             View view = View.inflate(getActivity(), R.layout.headview_exlistview_gallery_list, null);
             tvHeadViewExGalleryListChineseName = (TextView) view.findViewById(R.id.tv_HeadView_ExGalleryList_ChineseName);
             tvHeadViewExGalleryListChineseName.setText(gallery.getChineseName());
@@ -278,10 +294,9 @@ public class ActivityGalleryList extends AppCompatActivity {
             tvHeadViewExGalleryListLocaion.setText("");
             ivHeadViewExGalleryListTitle = (ImageView) view.findViewById(R.id.tv_HeadView_ExGalleryList_title);
 
-
             ExListViewGalleryList.addHeaderView(view);
-
-            GalleryExListViewAdapter galleryExListViewAdapter = new GalleryExListViewAdapter(getActivity(), getArguments().getInt(ARG_SECTION_NUMBER));
+            Log.d(TAG, "onActivityCreated: "+getArguments().getInt(ARG_SECTION_NUMBER));
+            GalleryExListViewAdapter galleryExListViewAdapter = new GalleryExListViewAdapter(getActivity(), gallery);
             ExListViewGalleryList.setAdapter(galleryExListViewAdapter);
             ExListViewGalleryList.expandGroup(galleryExListViewAdapter.getArmTypes().length - 1);
 
@@ -322,13 +337,13 @@ public class ActivityGalleryList extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position);
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return galleryArrayList.size();
         }
 
         @Override

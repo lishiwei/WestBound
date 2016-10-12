@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lishiwei.core.ImageLoad;
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
 import com.lishiwei.model.News;
 import com.lishiwei.westbund.R;
+import com.lishiwei.westbund.Utils.DataBindingUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -55,8 +57,8 @@ public class ActivityNewsDetail extends AppCompatActivity {
             tvNewsDetailMainTitle.setText(news.getMainTitle());
             tvNewsDetailSubTitle.setText(news.getSubTitle());
 //            tvNewsDetailTime.setText(df3.format(new Date(Long.valueOf(news.getCreateTime()))));
-            tvNewsDetailTime.setText(news.getCreateTime());
-            ImageLoad.displayImageView(ActivityNewsDetail.this,news.getNewsImgUrl(),ivNewsDetailImageView);
+            tvNewsDetailTime.setText(DataBindingUtils.getCorrectTime(news.getCreateTime()));
+            ImageLoad.displayImageView(ActivityNewsDetail.this, WestBoundRetrofit.BaseUrl+news.getNewsImgUrl(),ivNewsDetailImageView);
         }
     }
 

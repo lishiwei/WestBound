@@ -34,13 +34,16 @@ public class Gallery implements Parcelable {
     private String detail;
     private String history;
     private String idStr;
+    private String artists;
+    private String galleryImgUrl;
     /**
      * id : 201609051515011
      * artistChineseName : 作家名称
      * artistEnglishName : aaa
      */
 
-    private List<ArtistSetBean> artistSet;
+    private List<String> artistsArr;
+    private List<String> historyArr;
 
 
     public String getId() {
@@ -110,15 +113,59 @@ public class Gallery implements Parcelable {
         this.idStr = idStr;
     }
 
-    public List<ArtistSetBean> getArtistSet() {
-        return artistSet;
+
+    public Gallery() {
     }
 
-    public void setArtistSet(List<ArtistSetBean> artistSet) {
-        this.artistSet = artistSet;
+    @Override
+    public String toString() {
+        return "Gallery{" +
+                "id='" + id + '\'' +
+                ", chineseName='" + chineseName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                ", location='" + location + '\'' +
+                ", director='" + director + '\'' +
+                ", detail='" + detail + '\'' +
+                ", history='" + history + '\'' +
+                ", idStr='" + idStr + '\'' +
+//                ", artists='" + artists + '\'' +
+                ", galleryImgUrl='" + galleryImgUrl + '\'' +
+//                ", artistsArr=" + artistsArr +
+                ", historyArr=" + historyArr +
+                '}';
     }
 
+    public String getArtists() {
+        return artists;
+    }
 
+    public void setArtists(String artists) {
+        this.artists = artists;
+    }
+
+    public String getGalleryImgUrl() {
+        return galleryImgUrl;
+    }
+
+    public void setGalleryImgUrl(String galleryImgUrl) {
+        this.galleryImgUrl = galleryImgUrl;
+    }
+
+    public List<String> getArtistsArr() {
+        return artistsArr;
+    }
+
+    public void setArtistsArr(List<String> artistsArr) {
+        this.artistsArr = artistsArr;
+    }
+
+    public List<String> getHistoryArr() {
+        return historyArr;
+    }
+
+    public void setHistoryArr(List<String> historyArr) {
+        this.historyArr = historyArr;
+    }
 
     @Override
     public int describeContents() {
@@ -135,10 +182,10 @@ public class Gallery implements Parcelable {
         dest.writeString(this.detail);
         dest.writeString(this.history);
         dest.writeString(this.idStr);
-        dest.writeList(this.artistSet);
-    }
-
-    public Gallery() {
+        dest.writeString(this.artists);
+        dest.writeString(this.galleryImgUrl);
+        dest.writeStringList(this.artistsArr);
+        dest.writeStringList(this.historyArr);
     }
 
     protected Gallery(Parcel in) {
@@ -150,8 +197,10 @@ public class Gallery implements Parcelable {
         this.detail = in.readString();
         this.history = in.readString();
         this.idStr = in.readString();
-        this.artistSet = new ArrayList<ArtistSetBean>();
-        in.readList(this.artistSet, ArtistSetBean.class.getClassLoader());
+        this.artists = in.readString();
+        this.galleryImgUrl = in.readString();
+        this.artistsArr = in.createStringArrayList();
+        this.historyArr = in.createStringArrayList();
     }
 
     public static final Creator<Gallery> CREATOR = new Creator<Gallery>() {

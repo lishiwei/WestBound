@@ -6,6 +6,7 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.lishiwei.core.DataSource;
 import com.lishiwei.core.NewsRemoteDataSource;
 import com.lishiwei.model.News;
+import com.lishiwei.westbund.Fragment.FragmentHomePage;
 import com.lishiwei.westbund.ViewInterface.HomePageView;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class HomePagePresenter extends MvpBasePresenter<HomePageView> implements
             newsRemoteDataSource = new NewsRemoteDataSource();
             if (from!=null)
             {
-                newsRemoteDataSource.setFrom("1");
+                newsRemoteDataSource.setFrom(FragmentHomePage.ARTSCENE);
             }
 
         }

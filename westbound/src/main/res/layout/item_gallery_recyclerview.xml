@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:orientation="horizontal">
 
         <TextView
@@ -35,6 +36,7 @@
         android:layout_marginBottom="12dp"
         android:layout_marginTop="8dp"
         android:text="上海"
+        android:visibility="gone"
         android:textSize="12sp" />
     <View
         android:layout_width="match_parent"

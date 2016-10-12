@@ -1,6 +1,8 @@
 package com.lishiwei.westbund.Fragment.FragmentCalenderPkg;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -14,15 +16,20 @@ import android.view.ViewGroup;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
+import com.lishiwei.model.DayActivity;
 import com.lishiwei.model.Exhibition;
+import com.lishiwei.westbund.Adapter.DayActivityRecyclerAdapter;
 import com.lishiwei.westbund.Adapter.ExhibitionRecyclerAdapter;
 import com.lishiwei.westbund.Fragment.BaseMvpLceFragment;
 import com.lishiwei.westbund.Presenter.CallenderPresenter;
+import com.lishiwei.westbund.Presenter.DayActivityPresenter;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.Utils.DensityUtil;
 import com.lishiwei.westbund.Utils.SpaceItemDecoration;
 import com.lishiwei.westbund.ViewInterface.CallenderView;
+import com.lishiwei.westbund.ViewInterface.DayActivityView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -33,7 +40,7 @@ import butterknife.ButterKnife;
  * Use the {@link FragmentActivity#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, List<Exhibition>, CallenderView, CallenderPresenter> implements CallenderView {
+public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, List<DayActivity>, DayActivityView, DayActivityPresenter> implements DayActivityView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,11 +48,11 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
     private static final String TAG = FragmentActivity.class.getSimpleName();
     @Bind(R.id.ptr_Exhibition)
     PullToRefreshRecyclerView ptrExhibition;
-    ExhibitionRecyclerAdapter exhibitionRecyclerAdapter;
+    DayActivityRecyclerAdapter dayActivityRecyclerAdapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    List<DayActivity> dayActivityList = new ArrayList<>();
 
     public FragmentActivity() {
         // Required empty public constructor
@@ -91,10 +98,13 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
         contentView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                isLoadMore = false;
+                currentPageNumber = 1;
                 loadData(true);
             }
         });
-
+        dayActivityRecyclerAdapter = new DayActivityRecyclerAdapter();
+        ptrExhibition.getRefreshableView().setAdapter(dayActivityRecyclerAdapter);
         ptrExhibition.getRefreshableView().addItemDecoration(new SpaceItemDecoration(DensityUtil.dip2px(30)));
         ptrExhibition.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
@@ -104,6 +114,8 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+                currentPageNumber++;
+                isLoadMore = true;
                 loadData(true);
             }
         });
@@ -111,8 +123,8 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
     @NonNull
     @Override
-    public CallenderPresenter createPresenter() {
-        return new CallenderPresenter();
+    public DayActivityPresenter createPresenter() {
+        return new DayActivityPresenter();
     }
 
     @Override
@@ -141,19 +153,21 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
 
     @Override
-    public void setData(List<Exhibition> data) {
+    public void setData(List<DayActivity> data) {
         Log.d(TAG, "setData: ");
-        if (exhibitionRecyclerAdapter == null) {
-            exhibitionRecyclerAdapter = new ExhibitionRecyclerAdapter(getActivity());
-            ptrExhibition.getRefreshableView().setAdapter(exhibitionRecyclerAdapter);
+        if (isLoadMore) {
+            dayActivityList.addAll(data);
+        } else {
+            dayActivityList = data;
         }
-        exhibitionRecyclerAdapter.setExhibitionList(data);
+        dayActivityRecyclerAdapter.setDayActivityList(dayActivityList);
+        dayActivityRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
         Log.d(TAG, "loadData: ");
-        presenter.loadExihibition(1,10,pullToRefresh);
+        presenter.loadDayActivity(10,currentPageNumber, pullToRefresh);
     }
 
     @Override

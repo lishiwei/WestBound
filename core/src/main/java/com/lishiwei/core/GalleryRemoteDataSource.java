@@ -30,14 +30,14 @@ public class GalleryRemoteDataSource implements DataSource<Gallery> {
     public void getDatas(int pageSize, int pageNo,final @NonNull LoadDataCallBack<Gallery> loadDataCallBack) {
 
         final List<Gallery> list = new ArrayList<>();
+        Log.d(TAG, "getDatas: "+pageNo);
         WestBoundRetrofit.getRetrofitService().getGallery(JsonUtils.getPageInfo(pageSize,pageNo))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<BaseResponseBody<Gallery>, List<Gallery>>() {
                     @Override
                     public List<Gallery> call(BaseResponseBody<Gallery> newsBaseResponseBody) {
-                        Log.d(TAG, "call: "+newsBaseResponseBody.toString());
-                        Log.d(TAG, "call: "+newsBaseResponseBody.getDataList());
+                        Log.d(TAG, "call: "+newsBaseResponseBody.getPage().toString());
                         return newsBaseResponseBody.getDataList();
                     }
                 }).subscribe(new Subscriber<List<Gallery>>() {

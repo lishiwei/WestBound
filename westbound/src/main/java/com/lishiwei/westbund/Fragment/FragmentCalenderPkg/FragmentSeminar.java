@@ -20,6 +20,7 @@ import com.lishiwei.westbund.Presenter.SeminarPresenter;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.ViewInterface.SeminarView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -46,6 +47,7 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
     private String mParam1;
     private String mParam2;
     SeminarRecyclerAdapter seminarRecyclerAdapter;
+    List<Seminar> seminarList = new ArrayList<>();
 
     public FragmentSeminar() {
         // Required empty public constructor
@@ -98,11 +100,10 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
     }
 
     public void initViews(Bundle savedInstanceState) {
-        if (seminarRecyclerAdapter == null) {
-            seminarRecyclerAdapter = new SeminarRecyclerAdapter();
-        }
+        seminarRecyclerAdapter = new SeminarRecyclerAdapter();
         ptrSeminar.getRefreshableView().setLayoutManager(new LinearLayoutManager(getActivity()));
         ptrSeminar.getRefreshableView().setAdapter(seminarRecyclerAdapter);
+
         ptrSeminar.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         ptrSeminar.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
@@ -112,12 +113,16 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+                currentPageNumber++;
+                isLoadMore = true;
                 loadData(true);
             }
         });
         contentView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                currentPageNumber = 1;
+                isLoadMore = false;
                 loadData(true);
             }
         });
@@ -126,9 +131,16 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
 
     @Override
     public void setData(List<Seminar> data) {
-        seminarRecyclerAdapter.setSeminarList(data);
+        if (isLoadMore) {
+            seminarList.addAll(data);
+
+        } else {
+            seminarList = data;
+        }
+        seminarRecyclerAdapter.setSeminarList(seminarList);
         seminarRecyclerAdapter.notifyDataSetChanged();
     }
+
     @Override
     public void showContent() {
         super.showContent();
@@ -143,7 +155,7 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadData(1,10,false);
+        presenter.loadData(10,currentPageNumber, pullToRefresh);
     }
 
     @Override

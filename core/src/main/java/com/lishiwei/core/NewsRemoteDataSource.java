@@ -51,7 +51,7 @@ public class NewsRemoteDataSource implements DataSource<News> {
                 .map(new Func1<BaseResponseBody<News>, List<News>>() {
                     @Override
                     public List<News> call(BaseResponseBody<News> newsBaseResponseBody) {
-                        Log.d(TAG, "call: "+newsBaseResponseBody.toString());
+                        Log.d(TAG, "call: "+newsBaseResponseBody.getPage().toString());
                         Log.d(TAG, "call: "+newsBaseResponseBody.getDataList());
                         return newsBaseResponseBody.getDataList();
                     }

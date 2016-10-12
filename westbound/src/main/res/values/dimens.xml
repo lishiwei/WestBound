@@ -8,7 +8,7 @@
     <dimen name="exibition_title_top_margin">8dp</dimen>
     <dimen name="exibition_title_bottom_margin">8dp</dimen>
     <dimen name="exibition_item_margin">4dp</dimen>
-    <dimen name="exibition_item_textsize">12sp</dimen>
+    <dimen name="exibition_item_textsize">16sp</dimen>
     <dimen name="exibition_image_top_margin">8dp</dimen>
     <dimen name="exibition__line_margin">8dp</dimen>
 

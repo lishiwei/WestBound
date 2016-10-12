@@ -30,8 +30,7 @@
             <TextView
                 android:id="@+id/tv_Seminar_Date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick=""
+                android:layout_height="match_parent"
                 android:text="@{Senimar.startTime}"
                 android:textColor="@color/colorAccent"
                 android:textSize="22sp" />
@@ -39,7 +38,7 @@
             <TextView
                 android:id="@+id/tv_Seminar_Week"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="24dp"
 
                 android:text="@{Senimar.weekday}"
@@ -49,13 +48,12 @@
             <TextView
                 android:id="@+id/tv_Seminar_Status"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="24dp"
                 android:background="@color/colorAccent"
-                android:paddingBottom="2dp"
                 android:paddingLeft="4dp"
+                android:gravity="center"
                 android:paddingRight="4dp"
-                android:paddingTop="2dp"
                 android:text="@{DataBindingUtils.getCorrectStatus(Senimar.status)}"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
@@ -76,7 +74,7 @@
             android:layout_marginBottom="@dimen/exibition_title_bottom_margin"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
-            android:text="一位藏家的策展时间以及他的录像艺术收藏指南"
+            android:textSize="@dimen/exibition_item_textsize"
             android:textColor="#000000" />
 
         <TextView
@@ -85,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:text="@{Senimar.guest}"
-            android:textSize="@dimen/exibition_item_textsize" />
+            />
 
         <TextView
             android:id="@+id/tv_Seminar_Time"

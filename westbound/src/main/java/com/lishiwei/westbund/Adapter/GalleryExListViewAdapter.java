@@ -2,6 +2,7 @@ package com.lishiwei.westbund.Adapter;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lishiwei.core.ImageLoad;
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
+import com.lishiwei.model.Gallery;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.Utils.DensityUtil;
 
@@ -26,14 +30,14 @@ public class GalleryExListViewAdapter implements ExpandableListAdapter {
         return armTypes;
     }
 
-    int id;
+    Gallery gallery;
 
     public void setArmTypes(String[] armTypes) {
         this.armTypes = armTypes;
     }
 
     private String[] armTypes = new String[]{
-            "详情", "艺术总监", "展览历史", "艺术家", "画廊"};
+            "画廊详情", "联系人", "地址", "艺术家", "画廊照片"};
     private String[][] arms;
 
     @Override
@@ -128,7 +132,7 @@ public class GalleryExListViewAdapter implements ExpandableListAdapter {
             AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(200));
 
             imageView.setLayoutParams(lp);
-            imageView.setBackgroundResource(R.drawable.gallery);
+            ImageLoad.displayImageView(context, WestBoundRetrofit.BaseUrl+gallery.getGalleryImgUrl(),imageView);
             return imageView;
         }
         return null;
@@ -230,45 +234,18 @@ public class GalleryExListViewAdapter implements ExpandableListAdapter {
         return 0;
     }
 
-    public GalleryExListViewAdapter(Context context, int id) {
+    public GalleryExListViewAdapter(Context context, Gallery gallery) {
         this.context = context;
-        this.id = id;
-        Log.d(TAG, "GalleryExListViewAdapter: " + id);
-        if (id == 1) {
+        this.gallery = gallery;
 
             arms = new String[][]{
-                    {"艾可画廊位于意大利的帕勒莫，成立于2005年，主要展出意大利和世界范围内新兴艺术家的作品。" +
-                            "在成立之初，艾可画廊就十分关注中国当代艺术。2008年 艾可画廊进驻上海著名的艺术园区莫干山路50号（M50），" +
-                            "旨在促进中国艺术家和全世界的对话和交流。目前艾可画廊每年在上海和帕勒莫分别举办4次展览"},
-                    {"吕振光"},
-                    {"山水第D三零零二号", "模仿生活", "不被注册的城市", "2012” "},
-                    {"吕振光", "王晓曲", "蒋鹏奕", "陈杰",},
-                    {"还是这群人"}
-            };
+                    {gallery.getDetail()},
+                    {gallery.getDirector()},
+                    {gallery.getLocation().toString()},
+                    {gallery.getArtistsArr().toString()},
+                    {gallery.getGalleryImgUrl()}
 
-        }
-        if (id == 2) {
-            arms = new String[][]{
-                    {"北京现在画廊是一家经营中国当代前卫艺术的国际化专业艺术机构，于2004年成立于北京。画廊坐落于草场地艺术区，总面积达800多平方米，" +
-                            "共有两层展示空间，设有独立的影像厅和资料库。为进一步实施实验性和国际性的展览计划、" +
-                            "积极推介新锐艺术家及优秀作品创造了完美的空间。"},
-                    {"洪绍裴"},
-                    {"精灵 我许愿我不是个王子", "无题 7号", "弹琴的人之一 草地上的巴勒斯"},
-                    {"洪绍裴", "王劲松", "郑维"},
-                    {"还是这群人"}
-            };
-
-        }
-        if (id == 3) {
-            arms = new String[][]{
-                    {"站台中国的新画廊空间地处798艺术区中心区域，总面积超过700余平方米，分为展厅及研讨室。展览空间空旷高挑，适合展出各种媒介的艺术作品。同时设有“橱窗”项目空间，力图通过艺术跨界合作、以实验及探索的语言方式不定期的组织特定的现场装置和艺术项目，展现更为新锐实验的艺术创作。\n"
-                    },
-                    {"付经岩"},
-                    {"需要的平衡", "正午", "桃不桃", "沙滩"},
-                    {"付经岩", "汤大尧", "黄亮", "毕建业"},
-                    {"还是这群人"}
-            };
-        }
+        };
     }
 
     private TextView getGroupTextView() {
@@ -280,6 +257,7 @@ public class GalleryExListViewAdapter implements ExpandableListAdapter {
 
         textView.setPadding(DensityUtil.dip2px(12), DensityUtil.dip2px(12), DensityUtil.dip2px(12), DensityUtil.dip2px(12));
         textView.setTextSize(14);
+        textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         return textView;
     }
 

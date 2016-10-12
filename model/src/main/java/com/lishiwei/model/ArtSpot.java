@@ -22,6 +22,15 @@ public class ArtSpot implements Parcelable {
     private String imageUrl;
     private long createTime;
     private String idStr;
+    private String createTimeStr;
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
 
     public long getId() {
         return id;
@@ -83,6 +92,7 @@ public class ArtSpot implements Parcelable {
         dest.writeString(this.detail);
         dest.writeString(this.imageUrl);
         dest.writeLong(this.createTime);
+        dest.writeString(this.createTimeStr);
         dest.writeString(this.idStr);
     }
 
@@ -95,6 +105,7 @@ public class ArtSpot implements Parcelable {
         this.detail = in.readString();
         this.imageUrl = in.readString();
         this.createTime = in.readLong();
+        this.createTimeStr = in.readString();
         this.idStr = in.readString();
     }
 
@@ -109,4 +120,17 @@ public class ArtSpot implements Parcelable {
             return new ArtSpot[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "ArtSpot{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", detail='" + detail + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", createTime=" + createTime +
+                ", idStr='" + idStr + '\'' +
+                ", createTimeStr='" + createTimeStr + '\'' +
+                '}';
+    }
 }

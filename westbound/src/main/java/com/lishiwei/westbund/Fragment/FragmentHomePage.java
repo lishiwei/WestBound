@@ -44,11 +44,12 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
     PullToRefreshRecyclerView ptr_news;
     NewsRecyclerAdapter newsRecyclerAdapter;
     ArtSceneRecyclerAdapter artSceneRecyclerAdapter;
-    boolean isLoadMore = false;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     List<News> newsList = new ArrayList<>();
+public static String NEWS="news";
+public static String ARTSCENE="artscene";
 
     public FragmentHomePage() {
         // Required empty public constructor
@@ -57,8 +58,8 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
     @Override
     public IHomePagePresenter createPresenter() {
         HomePagePresenter homePagePresenter = new HomePagePresenter();
-        if (getArguments().get(ARG_PARAM1).equals("1")) {
-            homePagePresenter.setFrom("1");
+        if (getArguments().get(ARG_PARAM1).equals(ARTSCENE)) {
+            homePagePresenter.setFrom(ARTSCENE);
         }
 
         return homePagePresenter;
@@ -102,6 +103,7 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
             @Override
             public void onRefresh() {
                 isLoadMore = false;
+                currentPageNumber = 1;
                 loadData(true);
             }
         });
@@ -115,7 +117,7 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-
+currentPageNumber++;
                 isLoadMore = true;
                 loadData(true);
             }
@@ -140,21 +142,25 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
     @Override
     public void setData(List<News> list) {
-        if (getArguments().get(ARG_PARAM1).equals("")) {
-            newsRecyclerAdapter = new NewsRecyclerAdapter(getActivity());
-            ptr_news.getRefreshableView().setAdapter(newsRecyclerAdapter);
-
-            if (isLoadMore) {
-                newsList.addAll(list);
-            } else {
-                newsList = list;
+        if (isLoadMore) {
+            newsList.addAll(list);
+        } else {
+            newsList = list;
+        }
+        if (getArguments().get(ARG_PARAM1).equals(NEWS)) {
+            if (newsRecyclerAdapter==null)
+            {
+                newsRecyclerAdapter = new NewsRecyclerAdapter(getActivity(),newsList);
+                ptr_news.getRefreshableView().setAdapter(newsRecyclerAdapter);
+            }
+            newsRecyclerAdapter.notifyDataSetChanged();
+        } else if (getArguments().get(ARG_PARAM1).equals(ARTSCENE)) {
+            if (artSceneRecyclerAdapter==null)
+            {
+                artSceneRecyclerAdapter = new ArtSceneRecyclerAdapter(getActivity(),newsList);
+                ptr_news.getRefreshableView().setAdapter(artSceneRecyclerAdapter);
             }
 
-            newsRecyclerAdapter.setNewsList(newsList);
-        } else if (getArguments().get(ARG_PARAM1).equals("1")) {
-            artSceneRecyclerAdapter = new ArtSceneRecyclerAdapter(getActivity());
-            ptr_news.getRefreshableView().setAdapter(artSceneRecyclerAdapter);
-            artSceneRecyclerAdapter.setNewsList(list);
             artSceneRecyclerAdapter.notifyDataSetChanged();
         }
 
@@ -177,9 +183,7 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadNews(1,10,pullToRefresh);
-
-
+        presenter.loadNews(10,currentPageNumber,pullToRefresh);
     }
 
 

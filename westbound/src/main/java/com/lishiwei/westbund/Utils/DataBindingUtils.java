@@ -1,12 +1,15 @@
 package com.lishiwei.westbund.Utils;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.BindingConversion;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
+import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -53,19 +56,33 @@ public class DataBindingUtils {
     public PullToRefreshBase.Mode Pull_From_Start = PullToRefreshBase.Mode.PULL_FROM_START;
     public PullToRefreshBase.Mode Pull_Disable = PullToRefreshBase.Mode.DISABLED;
     public RecyclerView.LayoutManager LinearLayoutManager = new LinearLayoutManager(WestBundApplication.getInstance());
-public static String getCorrectImageUrl(String imageUrl)
-{
-    Log.d(TAG, "getCorrectImageUrl: "+WestBoundRetrofit.BaseUrl+imageUrl);
-    return WestBoundRetrofit.BaseUrl+imageUrl;
-}
-public static String getCorrectStatus(String status)
-{
-    if (status.equals("1"))
-    {return "西岸论坛";}
-    else {
-        return "现代传播路论坛";
+
+    public static String getCorrectImageUrl(String imageUrl) {
+        Log.d(TAG, "getCorrectImageUrl: " + WestBoundRetrofit.BaseUrl + imageUrl);
+        return WestBoundRetrofit.BaseUrl + imageUrl;
     }
 
+    public static String getCorrectStatus(String status) {
+        if (status.equals("1")) {
+            return "西岸论坛";
+        } else {
+            return "现代传播路论坛";
+        }
+
+    }
+
+    public static String getCorrectActivityStatus(String status) {
+        if (status.equals("进行中")) {
+            return "1";
+        } else {
+            return "0";
+        }
+
+    }
+
+    public static String getCorrectTime(String startTime,String endTime)
+    {
+        return startTime+"     --     "+endTime;
 }
     public static String getCorrectTime(String time)
     {
@@ -73,10 +90,17 @@ public static String getCorrectStatus(String status)
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
+    public static String getCorrectActivityTime(String startTime,String openTime,String time)
+    {
+
+        return  "开幕"+startTime+"/" +openTime+time;
+    }
+
     @BindingAdapter({"bind:image"})
     public static void imageLoader(ImageView imageView, String url) {
         ImageLoad.displayImageView(WestBundApplication.getInstance(), url, imageView);
     }
+
     @BindingConversion
     public static String convertDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

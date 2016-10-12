@@ -13,6 +13,7 @@ import com.lishiwei.westbund.Activity.ActivityArtScene;
 import com.lishiwei.westbund.Activity.ActivityGalleryList;
 import com.lishiwei.westbund.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -25,18 +26,8 @@ public class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryRecycler
 
     private static final String TAG = GalleryRecyclerAdapter.class.getSimpleName();
 
-    private List<Gallery> galleryList;
+    private ArrayList<Gallery> galleryList;
     private Context context;
-
-    String from;
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
 
     @Override
     public int getItemCount() {
@@ -50,17 +41,11 @@ public class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryRecycler
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (from.equals("1"))
-                {
                     Intent intent = new Intent(context, ActivityGalleryList.class);
                     Log.d(TAG, "onClick: " + holder.getLayoutPosition());
-                    intent.putExtra("gallery", galleryList.get(holder.getLayoutPosition()).getId());
+                    intent.putParcelableArrayListExtra(ActivityGalleryList.GALLERY, galleryList);
+                    intent.putExtra(ActivityGalleryList.GALLERYPOSITION, holder.getLayoutPosition());
                     context.startActivity(intent);
-                }
-                else if (from.equals("2")){
-                    Intent intent = new Intent(context, ActivityArtScene.class);
-                    context.startActivity(intent);
-                }
 
             }
         });
@@ -93,12 +78,12 @@ public class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryRecycler
         return galleryList;
     }
 
-    public void setGalleryList(List<Gallery> galleryList) {
+    public void setGalleryList(ArrayList<Gallery> galleryList) {
         this.galleryList = galleryList;
         notifyDataSetChanged();
     }
 
-    public GalleryRecyclerAdapter(List<Gallery> galleryList, Context context) {
+    public GalleryRecyclerAdapter(ArrayList<Gallery> galleryList, Context context) {
         this.galleryList = galleryList;
         this.context = context;
     }

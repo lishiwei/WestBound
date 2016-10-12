@@ -2,6 +2,7 @@ package com.lishiwei.core.Retrofit;
 
 import com.lishiwei.model.ArtSpot;
 import com.lishiwei.model.BaseResponseBody;
+import com.lishiwei.model.DayActivity;
 import com.lishiwei.model.Exhibition;
 import com.lishiwei.model.Gallery;
 import com.lishiwei.model.News;
@@ -61,7 +62,7 @@ public interface RetrofitService {
 
 @Headers({"Content-Type: application/json","Accept: application/json"})
     @POST("menu/activities/list.do")
-    Observable<BaseResponseBody<Exhibition>> getActivities(@Body JSONObject jsonObject);
+    Observable<BaseResponseBody<DayActivity>> getActivities(@Body JSONObject jsonObject);
 
 
 

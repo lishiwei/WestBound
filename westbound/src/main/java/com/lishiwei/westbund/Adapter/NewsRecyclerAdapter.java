@@ -36,11 +36,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int ITEM_TYPE_CONTENT = 1;
     DateFormat df3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public void setNewsList(List<News> newsList) {
-        this.newsList = newsList;
-
-    }
-
     @Override
     public int getItemCount() {
         return mHeaderCount + getContentItemCount();
@@ -131,7 +126,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
-    public NewsRecyclerAdapter(Context context) {
+    public NewsRecyclerAdapter(Context context,List<News> newsList) {
         this.context = context;
+        this.newsList = newsList;
     }
 }

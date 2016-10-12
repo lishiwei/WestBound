@@ -59,6 +59,8 @@ public abstract class BaseMvpLceFragment<CV extends View, M, V extends MvpLceVie
     protected View loadingView;
     protected CV contentView;
     protected TextView errorView;
+    protected int currentPageNumber = 1;
+   protected boolean isLoadMore = false;
 
     public abstract void initViews(Bundle savedInstanceState);
 

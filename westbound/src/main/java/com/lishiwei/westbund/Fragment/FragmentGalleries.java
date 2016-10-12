@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lishiwei.westbund.Adapter.ViewPagerAdapter;
+import com.lishiwei.westbund.Fragment.FragmentGalleryPkg.FragmentArtSpot;
 import com.lishiwei.westbund.Fragment.FragmentGalleryPkg.FragmentGallery;
 import com.lishiwei.westbund.R;
 
@@ -82,7 +83,7 @@ public class FragmentGalleries extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fragmentList.add(FragmentGallery.newInstance("1", ""));
-        fragmentList.add(FragmentHomePage.newInstance("1", ""));
+        fragmentList.add(FragmentArtSpot.newInstance("", ""));
         titleString.add("画廊");
         titleString.add("艺术现场");
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), fragmentList, getActivity(), titleString);

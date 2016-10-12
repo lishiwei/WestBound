@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(HOMEPAGE) == null) {
-            fragmentHomePage = FragmentHomePage.newInstance("", "");
+            fragmentHomePage = FragmentHomePage.newInstance(FragmentHomePage.NEWS, "");
             fragmentTransaction.add(R.id.fragmentContainer, fragmentHomePage, HOMEPAGE);
         } else {
             fragmentHomePage = (FragmentHomePage) fragmentManager.findFragmentByTag(HOMEPAGE);

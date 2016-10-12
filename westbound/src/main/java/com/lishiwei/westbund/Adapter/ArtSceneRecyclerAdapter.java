@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.lishiwei.core.ImageLoad;
 import com.lishiwei.core.Retrofit.WestBoundRetrofit;
+import com.lishiwei.model.ArtScene;
 import com.lishiwei.model.News;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.Utils.DataBindingUtils;
@@ -102,7 +103,8 @@ public class ArtSceneRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
-    public ArtSceneRecyclerAdapter(Context context) {
+    public ArtSceneRecyclerAdapter(Context context, List<News> newsList) {
         this.context = context;
+        this.newsList = newsList;
     }
 }

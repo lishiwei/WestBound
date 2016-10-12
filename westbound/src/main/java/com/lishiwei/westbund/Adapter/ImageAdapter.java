@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lishiwei.core.ImageLoad;
+import com.lishiwei.core.Retrofit.WestBoundRetrofit;
 import com.lishiwei.model.Gallery;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.Utils.OnItemClickListener;
+
+import java.util.List;
 
 
 /**
@@ -19,7 +23,7 @@ import com.lishiwei.westbund.Utils.OnItemClickListener;
 public class ImageAdapter extends PagerAdapter {
     Context context;
     OnItemClickListener onItemClickListener;
-
+List<Gallery> galleryList;
     public OnItemClickListener getOnItemClickListener() {
         return onItemClickListener;
     }
@@ -28,15 +32,16 @@ public class ImageAdapter extends PagerAdapter {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public ImageAdapter(Context context) {
+    public ImageAdapter(Context context,List<Gallery>galleryList) {
         this.context = context;
+        this.galleryList = galleryList;
     }
 
 
     @Override
     public int getCount() {
         //设置成最大，使用户看不到边界
-        return 3;
+        return galleryList.size();
     }
 
     @Override
@@ -54,16 +59,6 @@ public class ImageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
 
-        Gallery gallery = null;
-        if (position == 0) {
-            gallery = new Gallery("", "艾可画廊", "Aike-Dellarco", "" + R.drawable.pic1);
-        }
-        if (position == 1) {
-            gallery = new Gallery("", "北京现在画廊", "Beijing Art Now Gallery", "" + R.drawable.pic11);
-        }
-        if (position == 2) {
-            gallery = new Gallery("", "站台中国", "PlatFormChina", "" + R.drawable.pic21);
-        }
 
 
         //对ViewPager页号求模取出View列表中要显示的项
@@ -78,11 +73,10 @@ public class ImageAdapter extends PagerAdapter {
                 }
             }
         });
-        imageView.setBackgroundResource(Integer.valueOf(gallery.getLocation()));
+
         TextView title = (TextView) view.findViewById(R.id.tv_title);
-//        SubjectsInfo subjectsInfo = subjectsInfos.get(position);
-        title.setText(gallery.getChineseName());
-// ImageLoad.displayImageView(container.getContext(), imageView, subjectsInfo.getImages().getLarge(), context.getResources().getDrawable(R.mipmap.ic_loading));
+        title.setText(galleryList.get(position).getChineseName());
+ ImageLoad.displayImageView(container.getContext(), WestBoundRetrofit.BaseUrl+galleryList.get(position).getGalleryImgUrl(),imageView);
         container.addView(view);
 
         return view;

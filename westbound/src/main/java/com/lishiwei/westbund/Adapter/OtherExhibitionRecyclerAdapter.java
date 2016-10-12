@@ -2,6 +2,7 @@ package com.lishiwei.westbund.Adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import java.util.List;
  * Created by lishiwei on 16/8/19.
  */
 public class OtherExhibitionRecyclerAdapter extends RecyclerView.Adapter<OtherExhibitionRecyclerAdapter.ViewHolder> {
+
+    private static final String TAG = OtherExhibitionRecyclerAdapter.class.getSimpleName();
+
 
     public List<Exhibition> getExhibitionList() {
         return exhibitionList;
@@ -39,6 +43,7 @@ public class OtherExhibitionRecyclerAdapter extends RecyclerView.Adapter<OtherEx
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Log.d(TAG, "onBindViewHolder: ");
         holder.itemOtherexhibitionRecyclerviewBinding.setExhibition(exhibitionList.get(position));
     }
 
