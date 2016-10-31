@@ -65,18 +65,18 @@ public class FragmentMapFloor extends Fragment {
             int imgUrl = 0;
             if (mParam1.equals("1"))
             {
-                imgUrl = R.drawable.map1f;
+                imgUrl = R.drawable.main_venue;
             }if (mParam1.equals("2"))
             {
-                imgUrl = R.drawable.map2f;
+                imgUrl = R.drawable.new_venue;
             }if (mParam1.equals("3"))
             {
-                imgUrl = R.drawable.pilot;
+                imgUrl = R.drawable.demonstration_area;
             }if (mParam1.equals("4"))
             {
-                imgUrl = R.drawable.pilot;
+                imgUrl = R.drawable.westbund_area;
             }
-            ImageLoad.displayImageView(getActivity(), ""+imgUrl, photoViewMapFloor, new ImageLoad.PiccasoCallBack() {
+            ImageLoad.displayMapImageView(getActivity(), ""+imgUrl, photoViewMapFloor, new ImageLoad.PiccasoCallBack() {
                 @Override
                 public void onSuccess() {
                     attacher.update();

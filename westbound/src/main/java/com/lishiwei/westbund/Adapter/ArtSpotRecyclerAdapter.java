@@ -1,5 +1,6 @@
 package com.lishiwei.westbund.Adapter;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.lishiwei.model.ArtSpot;
 import com.lishiwei.model.Exhibition;
+import com.lishiwei.westbund.Activity.ActivityArtSpotDetails;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.databinding.ItemArtspotRecyclerviewBinding;
 import com.lishiwei.westbund.databinding.ItemOtherexhibitionRecyclerviewBinding;
@@ -32,11 +34,20 @@ public class ArtSpotRecyclerAdapter extends RecyclerView.Adapter<ArtSpotRecycler
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         ItemArtspotRecyclerviewBinding itemArtspotRecyclerviewBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.item_artspot_recyclerview, parent, true);
-        ViewHolder viewHolder = new ViewHolder(itemArtspotRecyclerviewBinding.getRoot());
+        final ViewHolder viewHolder = new ViewHolder(itemArtspotRecyclerviewBinding.getRoot());
         viewHolder.setItemOtherexhibitionRecyclerviewBinding(itemArtspotRecyclerviewBinding);
+        viewHolder.itemOtherexhibitionRecyclerviewBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(parent.getContext(),ActivityArtSpotDetails.class);
+                intent.putExtra(ActivityArtSpotDetails.ARTSPOT,artSpotList.get(viewHolder.getLayoutPosition()));
+                parent.getContext().startActivity(intent);
+            }
+        });
         return viewHolder;
     }
 

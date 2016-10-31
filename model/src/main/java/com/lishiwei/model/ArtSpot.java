@@ -23,6 +23,24 @@ public class ArtSpot implements Parcelable {
     private long createTime;
     private String idStr;
     private String createTimeStr;
+    private String artistName;
+    private String artworkName;
+
+    public String getArtworkName() {
+        return artworkName;
+    }
+
+    public void setArtworkName(String artworkName) {
+        this.artworkName = artworkName;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
 
     public String getCreateTimeStr() {
         return createTimeStr;
@@ -94,6 +112,8 @@ public class ArtSpot implements Parcelable {
         dest.writeLong(this.createTime);
         dest.writeString(this.createTimeStr);
         dest.writeString(this.idStr);
+        dest.writeString(this.artistName);
+        dest.writeString(this.artworkName);
     }
 
     public ArtSpot() {
@@ -107,6 +127,8 @@ public class ArtSpot implements Parcelable {
         this.createTime = in.readLong();
         this.createTimeStr = in.readString();
         this.idStr = in.readString();
+        this.artistName = in.readString();
+        this.artworkName = in.readString();
     }
 
     public static final Parcelable.Creator<ArtSpot> CREATOR = new Parcelable.Creator<ArtSpot>() {
@@ -131,6 +153,8 @@ public class ArtSpot implements Parcelable {
                 ", createTime=" + createTime +
                 ", idStr='" + idStr + '\'' +
                 ", createTimeStr='" + createTimeStr + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", artWorkName='" + artworkName + '\'' +
                 '}';
     }
 }

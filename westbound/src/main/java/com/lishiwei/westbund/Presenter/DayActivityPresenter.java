@@ -1,5 +1,7 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
+
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.lishiwei.core.DataSource;
 import com.lishiwei.core.DayActivityRemoteDataSource;
@@ -13,11 +15,16 @@ import java.util.List;
  */
 public class DayActivityPresenter extends MvpBasePresenter<DayActivityView> implements IDayActivityPresenter {
     DayActivityRemoteDataSource dayActivityRemoteDataSource;
+Context context;
+
+    public DayActivityPresenter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void loadDayActivity(int pageSize, int pageNo, boolean pullToRefresh) {
         if (dayActivityRemoteDataSource == null) {
-            dayActivityRemoteDataSource = new DayActivityRemoteDataSource();
+            dayActivityRemoteDataSource = new DayActivityRemoteDataSource(context);
         }
         if (isViewAttached()) {
             getView().showLoading(pullToRefresh);

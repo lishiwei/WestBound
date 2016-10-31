@@ -33,9 +33,9 @@
                 android:minHeight="600dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
+                android:id="@+id/ptr_OtherExhibition"
                 android:scrollbars="none"
                 app:Completefreshing="@{listener.isRefreshing}"
-                app:LayoutManager="@{DataBindingUtil.LinearLayoutManager}"
                 app:Mode="@{DataBindingUtil.pullFromEnd}"
                 app:OnRefreshListener="@{listener.onRefreshListener2}"
                 app:Adapter="@{listener.otherExhibitionRecyclerAdapter}" />

@@ -1,5 +1,6 @@
 package com.lishiwei.core;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -21,18 +22,23 @@ import rx.schedulers.Schedulers;
  */
 public class ArtSpotRemoteDataSource implements DataSource<ArtSpot> {
     private static final String TAG = ArtSpotRemoteDataSource.class.getSimpleName();
+Context context;
+
+    public ArtSpotRemoteDataSource(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void getDatas(int pageSize, int pageNo, @NonNull final LoadDataCallBack<ArtSpot> loadDataCallBack) {
         final List<ArtSpot> list = new ArrayList<>();
-        WestBoundRetrofit.getRetrofitService().getArtSpot(JsonUtils.getPageInfo(pageSize,pageNo))
+        WestBoundRetrofit.getRetrofitService(context).getArtSpot(JsonUtils.getPageInfoBody(pageSize, pageNo))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<BaseResponseBody<ArtSpot>, List<ArtSpot>>() {
                     @Override
                     public List<ArtSpot> call(BaseResponseBody<ArtSpot> newsBaseResponseBody) {
-                        Log.d(TAG, "call: "+newsBaseResponseBody.getPage().toString());
-                        Log.d(TAG, "call: "+newsBaseResponseBody.getDataList());
+                        Log.d(TAG, "call: " + newsBaseResponseBody.getPage().toString());
+                        Log.d(TAG, "call: " + newsBaseResponseBody.getDataList());
                         return newsBaseResponseBody.getDataList();
                     }
                 }).subscribe(new Subscriber<List<ArtSpot>>() {
@@ -43,7 +49,7 @@ public class ArtSpotRemoteDataSource implements DataSource<ArtSpot> {
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError: "+e.toString());
+                Log.d(TAG, "onError: " + e.toString());
                 loadDataCallBack.onSucceed(list);
                 //loadNewsCallBack.onError(e);
 
@@ -51,12 +57,12 @@ public class ArtSpotRemoteDataSource implements DataSource<ArtSpot> {
 
             @Override
             public void onNext(List<ArtSpot> newsList) {
-                Log.d(TAG, "onNext: "+newsList.toString());
+                Log.d(TAG, "onNext: " + newsList.toString());
                 if (newsList.size() > 0) {
                     loadDataCallBack.onSucceed(newsList);
 
                 } else {
-                    //loadNewsCallBack.onError(null);
+                    loadDataCallBack.onError();
                 }
             }
         });

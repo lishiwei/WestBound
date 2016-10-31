@@ -1,5 +1,6 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -15,7 +16,12 @@ import java.util.List;
  */
 public class SeminarPresenter extends MvpBasePresenter<SeminarView> implements ISeminarPresenter {
     private static final String TAG = SeminarPresenter.class.getSimpleName();
-    SeminarRemoteDataSource seminarRemoteDataSource = new SeminarRemoteDataSource();
+    SeminarRemoteDataSource seminarRemoteDataSource;
+Context context;
+
+    public SeminarPresenter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void loadData(int pageSize, int pageNo,boolean pullToRefresh) {
@@ -23,7 +29,7 @@ public class SeminarPresenter extends MvpBasePresenter<SeminarView> implements I
             getView().showLoading(pullToRefresh);
         }
         if (seminarRemoteDataSource == null) {
-            seminarRemoteDataSource = new SeminarRemoteDataSource();
+            seminarRemoteDataSource = new SeminarRemoteDataSource(context);
         }
         seminarRemoteDataSource.getDatas(pageSize,pageNo,new DataSource.LoadDataCallBack<Seminar>() {
             @Override

@@ -1,5 +1,6 @@
 package com.lishiwei.core;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -25,13 +26,18 @@ import rx.schedulers.Schedulers;
  */
 public class GalleryRemoteDataSource implements DataSource<Gallery> {
     private static final String TAG = GalleryRemoteDataSource.class.getSimpleName();
+Context context;
+
+    public GalleryRemoteDataSource(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void getDatas(int pageSize, int pageNo,final @NonNull LoadDataCallBack<Gallery> loadDataCallBack) {
 
         final List<Gallery> list = new ArrayList<>();
         Log.d(TAG, "getDatas: "+pageNo);
-        WestBoundRetrofit.getRetrofitService().getGallery(JsonUtils.getPageInfo(pageSize,pageNo))
+        WestBoundRetrofit.getRetrofitService(context).getGallery(JsonUtils.getPageInfoBody(pageSize,pageNo))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<BaseResponseBody<Gallery>, List<Gallery>>() {
@@ -61,8 +67,7 @@ public class GalleryRemoteDataSource implements DataSource<Gallery> {
                     loadDataCallBack.onSucceed(newsList);
 
                 } else {
-                    //loadNewsCallBack.onError(null);
-                }
+loadDataCallBack.onError();                }
             }
         });
     }

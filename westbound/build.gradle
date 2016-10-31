@@ -9,12 +9,13 @@ android {
         applicationId "com.lishiwei.westbund"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

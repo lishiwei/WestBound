@@ -28,6 +28,7 @@ import com.lishiwei.westbund.Utils.DensityUtil;
 import com.lishiwei.westbund.Utils.SpaceItemDecoration;
 import com.lishiwei.westbund.ViewInterface.CallenderView;
 import com.lishiwei.westbund.ViewInterface.DayActivityView;
+import com.lishiwei.westbund.WestBundApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +125,7 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
     @NonNull
     @Override
     public DayActivityPresenter createPresenter() {
-        return new DayActivityPresenter();
+        return new DayActivityPresenter(WestBundApplication.getInstance());
     }
 
     @Override
@@ -146,7 +147,6 @@ public class FragmentActivity extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
         contentView.setRefreshing(false);
         ptrExhibition.onRefreshComplete();
     }

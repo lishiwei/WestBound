@@ -90,9 +90,9 @@ public class FragmentCalender extends Fragment {
         fragmentList.add(FragmentSeminar.newInstance("", ""));
         fragmentList.add(FragmentActivity.newInstance("", ""));
         fragmentList.add(FragmentOtherExhibition.newInstance("", ""));
-        stringList.add("论坛");
-        stringList.add("每日活动");
-        stringList.add("同期展览");
+        stringList.add(getContext().getString(R.string.senimar));
+        stringList.add(getContext().getString(R.string.daily_activity));
+        stringList.add(getContext().getString(R.string.exhibition_same_period));
 
         FragmentCalenderBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calender, container, false);
         binding.setContainer(this);

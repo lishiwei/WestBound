@@ -1,5 +1,7 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
+
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.lishiwei.core.DataSource;
 import com.lishiwei.core.GalleryRemoteDataSource;
@@ -13,11 +15,17 @@ import java.util.List;
  */
 public class GalleryPresenter extends MvpBasePresenter<GalleryView> implements IGalleryPresenter {
     GalleryRemoteDataSource galleryRemoteDataSource ;
+    Context context;
+
+    public GalleryPresenter(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void loadGallery(int pageSize, int pageNo,final boolean pullToRefresh) {
         if (galleryRemoteDataSource==null)
         {
-            galleryRemoteDataSource = new GalleryRemoteDataSource();
+            galleryRemoteDataSource = new GalleryRemoteDataSource(context);
         }
         if (isViewAttached())
         {

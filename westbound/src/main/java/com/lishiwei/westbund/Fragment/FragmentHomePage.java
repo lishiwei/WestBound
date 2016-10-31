@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
 import com.lishiwei.model.News;
-import com.lishiwei.westbund.Adapter.ArtSceneRecyclerAdapter;
 import com.lishiwei.westbund.Adapter.NewsRecyclerAdapter;
 import com.lishiwei.westbund.Presenter.HomePagePresenter;
 import com.lishiwei.westbund.Presenter.IHomePagePresenter;
@@ -22,6 +21,7 @@ import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.Utils.DensityUtil;
 import com.lishiwei.westbund.Utils.SpaceItemDecoration;
 import com.lishiwei.westbund.ViewInterface.HomePageView;
+import com.lishiwei.westbund.WestBundApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +43,13 @@ public class FragmentHomePage extends BaseMvpLceFragment<SwipeRefreshLayout, Lis
     @Bind(R.id.Ptr_News)
     PullToRefreshRecyclerView ptr_news;
     NewsRecyclerAdapter newsRecyclerAdapter;
-    ArtSceneRecyclerAdapter artSceneRecyclerAdapter;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     List<News> newsList = new ArrayList<>();
-public static String NEWS="news";
-public static String ARTSCENE="artscene";
+    public static String NEWS = "news";
+    public static String ARTSCENE = "artscene";
 
     public FragmentHomePage() {
         // Required empty public constructor
@@ -57,11 +57,7 @@ public static String ARTSCENE="artscene";
 
     @Override
     public IHomePagePresenter createPresenter() {
-        HomePagePresenter homePagePresenter = new HomePagePresenter();
-        if (getArguments().get(ARG_PARAM1).equals(ARTSCENE)) {
-            homePagePresenter.setFrom(ARTSCENE);
-        }
-
+        HomePagePresenter homePagePresenter = new HomePagePresenter(WestBundApplication.getInstance());
         return homePagePresenter;
     }
 
@@ -117,7 +113,7 @@ public static String ARTSCENE="artscene";
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-currentPageNumber++;
+                currentPageNumber++;
                 isLoadMore = true;
                 loadData(true);
             }
@@ -147,22 +143,15 @@ currentPageNumber++;
         } else {
             newsList = list;
         }
-        if (getArguments().get(ARG_PARAM1).equals(NEWS)) {
-            if (newsRecyclerAdapter==null)
-            {
-                newsRecyclerAdapter = new NewsRecyclerAdapter(getActivity(),newsList);
-                ptr_news.getRefreshableView().setAdapter(newsRecyclerAdapter);
-            }
-            newsRecyclerAdapter.notifyDataSetChanged();
-        } else if (getArguments().get(ARG_PARAM1).equals(ARTSCENE)) {
-            if (artSceneRecyclerAdapter==null)
-            {
-                artSceneRecyclerAdapter = new ArtSceneRecyclerAdapter(getActivity(),newsList);
-                ptr_news.getRefreshableView().setAdapter(artSceneRecyclerAdapter);
-            }
 
-            artSceneRecyclerAdapter.notifyDataSetChanged();
+        if (newsRecyclerAdapter == null) {
+            newsRecyclerAdapter = new NewsRecyclerAdapter(getActivity(), newsList);
         }
+        if (ptr_news.getRefreshableView().getAdapter()==null)
+        {
+            ptr_news.getRefreshableView().setAdapter(newsRecyclerAdapter);
+        }
+        newsRecyclerAdapter.notifyDataSetChanged();
 
         Log.d(TAG, "setData:+ notifyDataSetChanged");
     }
@@ -176,14 +165,14 @@ currentPageNumber++;
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
+
         contentView.setRefreshing(false);
         ptr_news.onRefreshComplete();
     }
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadNews(10,currentPageNumber,pullToRefresh);
+        presenter.loadNews(10, currentPageNumber, pullToRefresh);
     }
 
 

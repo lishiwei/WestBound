@@ -19,6 +19,7 @@ import com.lishiwei.westbund.Presenter.ISeminarPresenter;
 import com.lishiwei.westbund.Presenter.SeminarPresenter;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.ViewInterface.SeminarView;
+import com.lishiwei.westbund.WestBundApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
 
     @Override
     public ISeminarPresenter createPresenter() {
-        return new SeminarPresenter();
+        return new SeminarPresenter(WestBundApplication.getInstance());
     }
 
     @Override
@@ -150,7 +151,8 @@ public class FragmentSeminar extends BaseMvpLceFragment<SwipeRefreshLayout, List
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
+        contentView.setRefreshing(false);
+        ptrSeminar.onRefreshComplete();
     }
 
     @Override

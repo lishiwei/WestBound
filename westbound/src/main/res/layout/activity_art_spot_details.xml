@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:spot="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.lishiwei.westbund.Utils.DataBindingUtils">
+        </import>
+        <variable
+            name="artSpot"
+            type="com.lishiwei.model.ArtSpot">
+        </variable>
+    </data>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@{artSpot.name}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|end"
+
+                        android:text="@{artSpot.createTimeStr}" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/mainColor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/news_left_margin"
+                    android:layout_marginRight="@dimen/news_left_margin"
+                    android:layout_marginTop="4dp"
+                    android:text="@{artSpot.artworkName}"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_News_Detail_SubTitle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/news_left_margin"-->
+                <!--android:layout_marginRight="@dimen/news_left_margin"-->
+                <!--android:layout_marginTop="@dimen/news_left_margin"-->
+                <!--android:lineSpacingMultiplier="1.5"-->
+                <!--android:text="西岸艺术与设计博览会于9月8号至13号在上海龙腾大道2555号的西岸艺术中心和西岸文化艺术示范区举办"-->
+                <!--android:textColor="@color/subtitle_color"-->
+                <!--android:textSize="12sp" />-->
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    spot:image="@{DataBindingUtils.getCorrectImageUrl(artSpot.imageUrl)}"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="@dimen/news_left_margin"
+                    android:layout_marginRight="@dimen/news_left_margin"
+                    android:lineSpacingMultiplier="1.5"
+                    android:text="@{artSpot.detail}"
+                    android:textColor="@color/subtitle_color"></TextView>
+
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:background="@color/mainColor"></View>-->
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="了解更多西岸艺术博览会的信息"-->
+                <!--android:textColor="@color/mainColor"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textStyle="italic" />-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:background="@drawable/right" />-->
+                <!--</LinearLayout>-->
+
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:background="@color/mainColor"></View>-->
+            </LinearLayout>
+        </ScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

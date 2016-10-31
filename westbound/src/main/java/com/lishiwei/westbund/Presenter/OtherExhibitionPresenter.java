@@ -1,5 +1,7 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
+
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.lishiwei.core.DataSource;
 import com.lishiwei.core.OtherExhibitionRemoteDataSource;
@@ -13,11 +15,17 @@ import java.util.List;
  */
 public class OtherExhibitionPresenter extends MvpBasePresenter<OtherExhibitionView>implements IOtherExhibitionPresenter {
     OtherExhibitionRemoteDataSource exhibitionRemoteDataSource ;
+    Context context;
+
+    public OtherExhibitionPresenter(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void loadData(int pageSize, int pageNo,final boolean pullToRefresh) {
         if (exhibitionRemoteDataSource==null)
         {
-            exhibitionRemoteDataSource = new OtherExhibitionRemoteDataSource();
+            exhibitionRemoteDataSource = new OtherExhibitionRemoteDataSource(context);
         }
         if (isViewAttached())
         {

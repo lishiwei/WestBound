@@ -1,5 +1,6 @@
 package com.lishiwei.core;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -24,12 +25,17 @@ import rx.schedulers.Schedulers;
  */
 public class SeminarRemoteDataSource implements DataSource<Seminar> {
     private static final String TAG = SeminarRemoteDataSource.class.getSimpleName();
+Context context;
+
+    public SeminarRemoteDataSource(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void getDatas(int pageSize, int pageNo,@NonNull final LoadDataCallBack<Seminar> loadDataCallBack) {
         final List<Seminar> seminarList = new ArrayList<>();
         final List<Seminar> list = new ArrayList<>();
-        WestBoundRetrofit.getRetrofitService().getSeminar(JsonUtils.getPageInfo(pageSize,pageNo))
+        WestBoundRetrofit.getRetrofitService(context).getSeminar(JsonUtils.getPageInfoBody(pageSize,pageNo))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<BaseResponseBody<Seminar>, List<Seminar>>() {
@@ -39,7 +45,8 @@ public class SeminarRemoteDataSource implements DataSource<Seminar> {
                         Log.d(TAG, "call: "+newsBaseResponseBody.getDataList());
                         return newsBaseResponseBody.getDataList();
                     }
-                }).subscribe(new Subscriber<List<Seminar>>() {
+                }).
+                subscribe(new Subscriber<List<Seminar>>() {
             @Override
             public void onCompleted() {
 
@@ -60,8 +67,7 @@ public class SeminarRemoteDataSource implements DataSource<Seminar> {
                     loadDataCallBack.onSucceed(newsList);
 
                 } else {
-                    //loadNewsCallBack.onError(null);
-                }
+loadDataCallBack.onError();                }
             }
         });
 

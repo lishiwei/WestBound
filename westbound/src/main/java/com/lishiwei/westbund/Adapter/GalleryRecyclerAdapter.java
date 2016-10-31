@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lishiwei.model.Gallery;
-import com.lishiwei.westbund.Activity.ActivityArtScene;
 import com.lishiwei.westbund.Activity.ActivityGalleryList;
 import com.lishiwei.westbund.R;
 

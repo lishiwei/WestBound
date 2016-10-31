@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">westbound</string>
+    <string name="home_page">WestBund</string>
+    <string name="Cooperate">WestBund</string>
+    <string name="Message">WestBund</string>
+    <string name="Myself">WestBund</string>
+    <string name="back">返回</string>
+    <string name="gallery">Gallery</string>
+    <string name="artspot">Xiàn Chǎng</string>
+    <string name="gallery_detail">Details</string>
+    <string name="contact">Contact/Location</string>
+    <string name="city">City</string>
+    <string name="artist">Artist</string>
+    <string name="gallery_photo">Photo</string>
+    <string name="senimar">Art Forum</string>
+    <string name="daily_activity">Events</string>
+    <string name="exhibition_same_period">Exhibition</string>
+    <string name="mainvenue">HALL A</string>
+    <string name="newvenue">HALL B</string>
+    <string name="demonstration_area">Pilot Zone</string>
+    <string name="westbund_area">West Bund</string>
+    <string name="westbund_picture_album">Request Catalog</string>
+    <string name="westbund_picture_album_email">:  Click to send email to catalogue@westbundshanghai.com </string>
+ <string name="westbund_brief_introduction">The new edition of West Bund Art Design will be held at West Bund Art Center from November 9th (Wed) to 13th (Sun) 2016. This year nearly 31 leading contemporary galleries from domestic and abroad will participate and bring works from the most dynamic and pioneering artists to the fair.
+
+All the museums, galleries, art studios, architect offices and art institutions from the west bund area will join and bring exciting events to the extravaganza along with Shanghai Biennial 2016. A wave of enthusiasm for contemporary art will have swept over Shanghai by that time.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_activity_gallery_list">ActivityGalleryList</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="title_activity_activity_splash">ActivitySplash</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_activity_news_detail">newsdetails</string>
+    <string name="title_activity_activity_product_detail">ActivityProductDetail</string>
+    <string name="title_activity_activity_about">ActivityAbout</string>
+    <string name="title_activity_activity_art_scene">ActivityArtScene</string>
+    <string name="title_activity_activity_art_spot_details">ActivityArtSpotDetails</string>
+</resources>

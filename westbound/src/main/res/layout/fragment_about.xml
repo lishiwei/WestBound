@@ -17,62 +17,49 @@
             android:layout_width="60dp"
             android:layout_height="80dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/logo_vert" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="@string/westbund_brief_introduction"
+            android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
+            android:layout_marginTop="12dp"
             android:background="#e5e5e5" />
 
         <LinearLayout
-            android:id="@+id/ln_About_MyCollections"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-android:visibility="gone"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="我的收藏" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-
-                android:layout_gravity="center|end"
-                android:background="@drawable/right" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#e5e5e5" />
-
-        <LinearLayout
-            android:id="@+id/ln_About_PictureBooks"
+            android:id="@+id/ln_WestBundGallery"
             android:layout_width="match_parent"
             android:layout_height="44dp"
 
             android:gravity="center_vertical"
             android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/mainColor"
+        android:layout_gravity="center"
+        android:textSize="14sp"
+        android:text="@string/westbund_picture_album" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/mainColor"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="bottom"
+        android:textSize="9sp"
+        android:text="@string/westbund_picture_album_email" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="西岸画册" />
+</LinearLayout>
+
 
             <View
                 android:layout_width="0dp"
@@ -91,207 +78,12 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#e5e5e5" />
-
-        <LinearLayout
-            android:id="@+id/ln_About_About"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="关于" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-
-                android:layout_gravity="center|end"
-                android:background="@drawable/right" />
-        </LinearLayout>
-
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="44dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:gravity="center_vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:text="设置" />-->
-
-        <!--<View-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1" />-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="20dp"-->
-
-        <!--android:layout_gravity="center|end"-->
-        <!--android:background="@drawable/right" />-->
-        <!--</LinearLayout>-->
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#e5e5e5" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:paddingBottom="12dp"
-            android:paddingTop="12dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="合作伙伴" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-
-                android:layout_gravity="center|end"
-                android:background="@drawable/right" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#e5e5e5"
-            android:visibility="gone" />
-
-        <View
-            android:layout_width="20dp"
-            android:layout_height="4dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="52dp"
-            android:background="@color/mainColor"></View>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="2015 战略合作传媒集团"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/zanzhushang2" />
-
-        <View
-            android:layout_width="20dp"
-            android:layout_height="4dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:background="@color/mainColor"></View>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="2015 战略合作传媒集团"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/zanzhushang3" />
-
-        <View
-            android:layout_width="20dp"
-            android:layout_height="4dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:background="@color/mainColor"></View>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="2015 媒体合作伙伴"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="1"
-                android:src="@drawable/ideat" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="1"
-                android:src="@drawable/artnet" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="1"
-                android:src="@drawable/zhoumohuabao" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="1"
-                android:src="@drawable/andi" />
-        </LinearLayout>
-
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/partner" />
     </LinearLayout>
 
 </ScrollView>

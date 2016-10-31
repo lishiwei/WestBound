@@ -1,5 +1,6 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -16,12 +17,16 @@ import java.util.List;
 public class CallenderPresenter extends MvpBasePresenter<CallenderView> implements ICallendarPresenter {
     private static final String TAG = CallenderPresenter.class.getSimpleName();
     ExhibitionRemoteDataSource exhibitionRemoteDataSource;
-
+Context context;
     @Override
     public void attachView(CallenderView view) {
         super.attachView(view);
 
 
+    }
+
+    public CallenderPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -30,7 +35,7 @@ public class CallenderPresenter extends MvpBasePresenter<CallenderView> implemen
             getView().showLoading(pullToRefresh);
         }
         if (exhibitionRemoteDataSource == null) {
-            exhibitionRemoteDataSource = new ExhibitionRemoteDataSource();
+            exhibitionRemoteDataSource = new ExhibitionRemoteDataSource(context);
         }
         exhibitionRemoteDataSource.getDatas(pageSize,pageNo,new DataSource.LoadDataCallBack<Exhibition>() {
             @Override

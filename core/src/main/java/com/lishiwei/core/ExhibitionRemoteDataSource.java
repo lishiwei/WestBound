@@ -1,5 +1,6 @@
 package com.lishiwei.core;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -23,11 +24,16 @@ import rx.schedulers.Schedulers;
  */
 public class ExhibitionRemoteDataSource implements DataSource<Exhibition> {
     private static final String TAG = ExhibitionRemoteDataSource.class.getSimpleName();
+Context context;
+
+    public ExhibitionRemoteDataSource(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void getDatas(int pageSize, int pageNo,@NonNull final LoadDataCallBack<Exhibition> loadDataCallBack) {
         final List<Exhibition> list = new ArrayList<>();
-        WestBoundRetrofit.getRetrofitService().getExhibition(JsonUtils.getPageInfo(pageSize,pageNo))
+        WestBoundRetrofit.getRetrofitService(context).getExhibition(JsonUtils.getPageInfoBody(pageSize,pageNo))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<BaseResponseBody<Exhibition>, List<Exhibition>>() {
@@ -58,8 +64,7 @@ public class ExhibitionRemoteDataSource implements DataSource<Exhibition> {
                     loadDataCallBack.onSucceed(newsList);
 
                 } else {
-                    //loadNewsCallBack.onError(null);
-                }
+loadDataCallBack.onError();                }
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -19,11 +20,15 @@ import java.util.List;
 public class ArtSpotPresenter extends MvpBasePresenter<ArtSpotView> implements IArtSpotPresenter {
     private static final String TAG = ArtSpotPresenter.class.getSimpleName();
     ArtSpotRemoteDataSource artSpotRemoteDataSource;
+Context context ;
+
+    public ArtSpotPresenter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void attachView(ArtSpotView view) {
         super.attachView(view);
-
 
     }
 
@@ -33,7 +38,7 @@ public class ArtSpotPresenter extends MvpBasePresenter<ArtSpotView> implements I
             getView().showLoading(pullToRefresh);
         }
         if (artSpotRemoteDataSource == null) {
-            artSpotRemoteDataSource = new ArtSpotRemoteDataSource();
+            artSpotRemoteDataSource = new ArtSpotRemoteDataSource(context);
         }
         artSpotRemoteDataSource.getDatas(pageSize,pageNo,new DataSource.LoadDataCallBack<ArtSpot>() {
             @Override

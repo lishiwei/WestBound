@@ -1,5 +1,6 @@
 package com.lishiwei.core;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -25,27 +26,16 @@ import rx.schedulers.Schedulers;
 public class NewsRemoteDataSource implements DataSource<News> {
 
     private static final String TAG = NewsRemoteDataSource.class.getSimpleName();
-    String from;
+    Context context;
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
+    public NewsRemoteDataSource(Context context) {
+        this.context = context;
     }
 
     @Override
     public void getDatas(int pageSize,int pageNo,final @NonNull DataSource.LoadDataCallBack<News> loadNewsCallBack) {
         final List<News> list = new ArrayList<>();
-        JSONObject json = new JSONObject();
-        try {
-            json.put("pageSize", pageSize);
-            json.put("pageNo", pageNo);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        WestBoundRetrofit.getRetrofitService().getNews(json)
+        WestBoundRetrofit.getRetrofitService(context).getNews(JsonUtils.getPageInfoBody(pageSize,pageNo))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .map(new Func1<BaseResponseBody<News>, List<News>>() {
@@ -76,8 +66,7 @@ public class NewsRemoteDataSource implements DataSource<News> {
                     loadNewsCallBack.onSucceed(newsList);
 
                 } else {
-                    //loadNewsCallBack.onError(null);
-                }
+loadNewsCallBack.onError();                }
             }
         });
 

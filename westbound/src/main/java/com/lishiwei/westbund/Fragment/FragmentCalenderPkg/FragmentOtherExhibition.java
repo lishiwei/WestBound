@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
 import com.lishiwei.model.Exhibition;
 import com.lishiwei.westbund.Adapter.OtherExhibitionRecyclerAdapter;
 import com.lishiwei.westbund.Fragment.BaseMvpLceFragment;
@@ -21,6 +22,7 @@ import com.lishiwei.westbund.Presenter.OtherExhibitionPresenter;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.Utils.DataBindingUtils;
 import com.lishiwei.westbund.ViewInterface.OtherExhibitionView;
+import com.lishiwei.westbund.WestBundApplication;
 import com.lishiwei.westbund.databinding.FragmentOtherExhibitionBinding;
 
 import java.util.ArrayList;
@@ -80,7 +82,7 @@ public class FragmentOtherExhibition extends BaseMvpLceFragment<SwipeRefreshLayo
 
     @Override
     public IOtherExhibitionPresenter createPresenter() {
-        return new OtherExhibitionPresenter();
+        return new OtherExhibitionPresenter(WestBundApplication.getInstance());
     }
 
     @Override
@@ -130,6 +132,7 @@ public class FragmentOtherExhibition extends BaseMvpLceFragment<SwipeRefreshLayo
         otherExhibitionRecyclerAdapter = new OtherExhibitionRecyclerAdapter();
         FragmentOtherExhibitionBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other_exhibition, container, true);
         binding.setListener(this);
+        binding.ptrOtherExhibition.getRefreshableView().setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.setDataBindingUtil(DataBindingUtils.newInstance());
 
         ButterKnife.bind(this, binding.getRoot());
@@ -161,6 +164,12 @@ public class FragmentOtherExhibition extends BaseMvpLceFragment<SwipeRefreshLayo
         }
         otherExhibitionRecyclerAdapter.setExhibitionList(exhibitionList);
         otherExhibitionRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError(Throwable e, boolean pullToRefresh) {
+        contentView.setRefreshing(false);
+        isRefreshing.set(false);
     }
 
     @Override

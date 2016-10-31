@@ -6,7 +6,6 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 /**
  * Created by lishiwei on 16/5/18.
  */
@@ -36,7 +35,7 @@ public class ImageLoad {
     public static void displayImageView(Context context, String imageURL, final ImageView imageView) {
 
         imageView.setBackgroundColor(Color.parseColor("#cecece"));
-        Picasso.with(context).load(imageURL).placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).centerInside().fit().error(R.drawable.ic_cloud_off).into(imageView, new Callback() {
+        Picasso.with(context).load(imageURL).placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).centerInside().fit().error(R.drawable.logo_icon).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
                 imageView.setBackgroundColor(Color.parseColor("#00000000"));
@@ -64,9 +63,25 @@ public class ImageLoad {
         });
     }
 
-    public static void displayImageView(Context context, String imageURL, final ImageView imageView, final PiccasoCallBack piccasoCallBack) {
+    public static void displaySenimarImageView(Context context, String imageURL, final ImageView imageView) {
         imageView.setBackgroundColor(Color.parseColor("#cecece"));
-        Picasso.with(context).load(Integer.valueOf(imageURL)).placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).error(R.drawable.ic_cloud_off).into(imageView, new Callback() {
+        Picasso.with(context).load(imageURL).placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).error(R.drawable.logo_icon).into(imageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                imageView.setBackgroundColor(Color.parseColor("#00000000"));
+
+            }
+
+            @Override
+            public void onError() {
+                imageView.setBackgroundColor(Color.parseColor("#00000000"));
+
+            }
+        });
+    }
+    public static void displayMapImageView(Context context, String imageURL, final ImageView imageView, final PiccasoCallBack piccasoCallBack) {
+        imageView.setBackgroundColor(Color.parseColor("#cecece"));
+        Picasso.with(context).load(Integer.valueOf(imageURL)).resize(DensityUtil.dip2px(500),DensityUtil.dip2px(830)).centerInside().placeholder(context.getResources().getDrawable(R.drawable.loadingcore)).error(R.drawable.ic_cloud_off).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
                 imageView.setBackgroundColor(Color.parseColor("#00000000"));

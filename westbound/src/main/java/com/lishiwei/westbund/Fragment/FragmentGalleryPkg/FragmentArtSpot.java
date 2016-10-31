@@ -24,6 +24,7 @@ import com.lishiwei.westbund.R;
 
 import com.lishiwei.westbund.ViewInterface.ArtSpotView;
 import com.lishiwei.westbund.ViewInterface.GalleryView;
+import com.lishiwei.westbund.WestBundApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,6 @@ List<ArtSpot>  artSpotList=new ArrayList<>();
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
         ptrGallery.onRefreshComplete();
         contentView.setRefreshing(false);
     }
@@ -68,7 +68,7 @@ List<ArtSpot>  artSpotList=new ArrayList<>();
 
     @Override
     public ArtSpotPresenter createPresenter() {
-        return new ArtSpotPresenter();
+        return new ArtSpotPresenter(WestBundApplication.getInstance());
     }
 
 

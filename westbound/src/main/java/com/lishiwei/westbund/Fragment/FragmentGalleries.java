@@ -84,8 +84,8 @@ public class FragmentGalleries extends Fragment {
         super.onActivityCreated(savedInstanceState);
         fragmentList.add(FragmentGallery.newInstance("1", ""));
         fragmentList.add(FragmentArtSpot.newInstance("", ""));
-        titleString.add("画廊");
-        titleString.add("艺术现场");
+        titleString.add(getContext().getResources().getString(R.string.gallery));
+        titleString.add(getContext().getResources().getString(R.string.artspot));
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), fragmentList, getActivity(), titleString);
         tabGallery.setTabGravity(TabLayout.GRAVITY_FILL);
         tabGallery.setTabMode(TabLayout.MODE_FIXED);

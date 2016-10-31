@@ -60,22 +60,24 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="16dp"
-            app:image="@{DataBindingUtils.getCorrectImageUrl(Senimar.seminarImgUrl)}"
-            />
+            android:scaleType="fitStart"
+            app:image="@{DataBindingUtils.getCorrectImageUrl(Senimar.seminarImgUrl)}" />
 
         <TextView
-            android:id="@+id/tv_Seminar_Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/exibition_title_bottom_margin"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="16dp"
             android:textSize="@dimen/exibition_item_textsize"
+            android:text="@{Senimar.title}"
             android:textColor="#000000" />
+
 
         <TextView
             android:id="@+id/tv_Seminar_Guest"
@@ -89,10 +91,16 @@
             android:id="@+id/tv_Seminar_Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:text="@{Senimar.time}"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="@dimen/exibition_item_margin"
-            android:text="@{Senimar.time}"
-            android:textSize="@dimen/exibition_item_textsize" />
+            android:layout_marginTop="8dp"
+            android:text="@{Senimar.location}" />
     </LinearLayout>
 </layout>

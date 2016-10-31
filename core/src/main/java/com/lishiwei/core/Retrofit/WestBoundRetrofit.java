@@ -1,6 +1,7 @@
 package com.lishiwei.core.Retrofit;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -27,12 +28,18 @@ import rx.schedulers.Schedulers;
  * Created by lishiwei on 15/12/31.
  */
 public class WestBoundRetrofit {
-public static String BaseUrl = "http://115.159.76.141:8080/westbund/";
+    public static String ChineseBaseUrl = "http://115.159.76.141:8080/westbund/";
+    public static String EnglishBaseUrl = "http://115.159.76.141:8081/westbund/";
+    public static String BaseUrl;
     private static final String TAG = WestBoundRetrofit.class.getSimpleName();
     static RetrofitService RetrofitService;
 
-    public static RetrofitService getRetrofitService() {
-
+    public static RetrofitService getRetrofitService(Context context) {
+        if (context.getResources().getConfiguration().locale.getCountry().equals("CN")) {
+            BaseUrl = ChineseBaseUrl;
+        } else {
+            BaseUrl = EnglishBaseUrl;
+        }
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(30, TimeUnit.SECONDS);
         okHttpClient.setWriteTimeout(30, TimeUnit.SECONDS);

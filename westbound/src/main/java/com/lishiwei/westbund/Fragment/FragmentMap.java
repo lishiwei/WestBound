@@ -79,10 +79,10 @@ public class FragmentMap extends Fragment {
         fragmentList.add(FragmentMapFloor.newInstance("2", ""));
         fragmentList.add(FragmentMapFloor.newInstance("3", ""));
         fragmentList.add(FragmentMapFloor.newInstance("4", ""));
-        titleString.add("主场馆");
-        titleString.add("新馆");
-        titleString.add("示范区");
-        titleString.add("西岸地区");
+        titleString.add(getContext().getResources().getString(R.string.mainvenue));
+        titleString.add(getContext().getResources().getString(R.string.newvenue));
+        titleString.add(getContext().getResources().getString(R.string.demonstration_area));
+        titleString.add(getContext().getResources().getString(R.string.westbund_area));
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), fragmentList, getActivity(), titleString);
         tabMap.setTabGravity(TabLayout.GRAVITY_FILL);
         tabMap.setTabMode(TabLayout.MODE_FIXED);

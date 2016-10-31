@@ -20,6 +20,7 @@ import com.lishiwei.westbund.Fragment.BaseMvpLceFragment;
 import com.lishiwei.westbund.Presenter.GalleryPresenter;
 import com.lishiwei.westbund.R;
 import com.lishiwei.westbund.ViewInterface.GalleryView;
+import com.lishiwei.westbund.WestBundApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,6 @@ List<Gallery>  galleryList=new ArrayList<>();
 
     @Override
     public void showError(Throwable e, boolean pullToRefresh) {
-        super.showError(e, pullToRefresh);
         ptrGallery.onRefreshComplete();
         contentView.setRefreshing(false);
     }
@@ -64,7 +64,7 @@ List<Gallery>  galleryList=new ArrayList<>();
 
     @Override
     public GalleryPresenter createPresenter() {
-        return new GalleryPresenter();
+        return new GalleryPresenter(WestBundApplication.getInstance());
     }
 
 

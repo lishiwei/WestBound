@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.lishiwei.westbund.Activity.ActivityAbout;
@@ -27,14 +28,6 @@ public class FragmentAbout extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    @Bind(R.id.ln_About_MyCollections)
-    LinearLayout lnAboutMyCollections;
-    @Bind(R.id.ln_About_PictureBooks)
-    LinearLayout lnAboutPictureBooks;
-    @Bind(R.id.ln_About_About)
-    LinearLayout lnAboutAbout;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -103,17 +96,24 @@ public class FragmentAbout extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+    public int sendMailByIntent() {
+        String[] reciver = new String[] { "catalogue@westbundshanghai.com" };
+        String[] mySbuject = new String[] { "test" };
+        String myCc = "cc";
+        String mybody = "获取画册";
+        Intent myIntent = new Intent(android.content.Intent.ACTION_SEND);
+        myIntent.setType("plain/text");
+        myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);
+//        myIntent.putExtra(android.content.Intent.EXTRA_CC, myCc);
+        myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mySbuject);
+//        myIntent.putExtra(android.content.Intent.EXTRA_TEXT, mybody);
+        startActivity(Intent.createChooser(myIntent, "发送邮件"));
 
-    @OnClick({R.id.ln_About_MyCollections, R.id.ln_About_PictureBooks, R.id.ln_About_About})
+        return 1;
+
+    }
+    @OnClick({R.id.ln_WestBundGallery})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ln_About_MyCollections:
-                break;
-            case R.id.ln_About_PictureBooks:
-                break;
-            case R.id.ln_About_About:
-                startActivity(new Intent(getActivity(), ActivityAbout.class));
-                break;
-        }
+        sendMailByIntent();
     }
 }

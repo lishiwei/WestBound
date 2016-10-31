@@ -1,5 +1,6 @@
 package com.lishiwei.westbund.Presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -16,10 +17,11 @@ import java.util.List;
  */
 public class HomePagePresenter extends MvpBasePresenter<HomePageView> implements IHomePagePresenter {
     NewsRemoteDataSource newsRemoteDataSource;
-    String from;
 
-    public void setFrom(String from) {
-        this.from = from;
+Context context;
+
+    public HomePagePresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -29,12 +31,7 @@ public class HomePagePresenter extends MvpBasePresenter<HomePageView> implements
         }
 
         if (newsRemoteDataSource == null) {
-            newsRemoteDataSource = new NewsRemoteDataSource();
-            if (from!=null)
-            {
-                newsRemoteDataSource.setFrom(FragmentHomePage.ARTSCENE);
-            }
-
+            newsRemoteDataSource = new NewsRemoteDataSource(context);
         }
         newsRemoteDataSource.getDatas(pageSize,pageNo,new DataSource.LoadDataCallBack<News>(){
             @Override

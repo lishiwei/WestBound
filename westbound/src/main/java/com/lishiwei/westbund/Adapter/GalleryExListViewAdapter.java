@@ -36,8 +36,8 @@ public class GalleryExListViewAdapter implements ExpandableListAdapter {
         this.armTypes = armTypes;
     }
 
-    private String[] armTypes = new String[]{
-            "画廊详情", "联系人", "地址", "艺术家", "画廊照片"};
+    private String[] armTypes ;
+
     private String[][] arms;
 
     @Override
@@ -241,11 +241,13 @@ public class GalleryExListViewAdapter implements ExpandableListAdapter {
             arms = new String[][]{
                     {gallery.getDetail()},
                     {gallery.getDirector()},
-                    {gallery.getLocation().toString()},
-                    {gallery.getArtistsArr().toString()},
+                    {gallery.getLocation()},
+                    {gallery.getArtists()},
                     {gallery.getGalleryImgUrl()}
 
         };
+        armTypes = new String[]{
+                context.getString(R.string.gallery_detail), context.getString(R.string.contact), context.getString(R.string.city),context.getString(R.string.artist), context.getString(R.string.gallery_photo)};
     }
 
     private TextView getGroupTextView() {
