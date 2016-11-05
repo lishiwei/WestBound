@@ -9,8 +9,8 @@ android {
         applicationId "com.lishiwei.westbund"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 24
-        versionCode 3
-        versionName "1.2"
+        versionCode 5
+        versionName "1.5"
     }
     buildTypes {
         release {
